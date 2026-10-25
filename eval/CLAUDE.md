@@ -75,6 +75,11 @@ One copy of every script lives in eval/; it runs unchanged on Mac and Windows. N
   so run_glm_ocr forces mode="selfhosted" and refuses to run if ZHIPU_API_KEY/GLMOCR_API_KEY is set.
 - Mac attempt (MLX-VLM server + PaddleOCR client) hung before any request reached the server; abandoned.
 - MSI, PaddleOCR-VL: models load, then OOM on 6 GB. RTX 2060 has no bf16 so the VLM loads in float32
-  (~4 GB); default config queues 64 pages and layout batch 8. parsers.py now forces batch 1 / no queues;
-  NOT yet re-tested on the MSI. Next fallbacks: PADDLE_VL_MAX_PIXELS=501760, then llama-cpp-server backend.
+  (~4 GB); default config queues 64 pages and layout batch 8. parsers.py forces batch 1 / no queues, but
+  the MSI run still OOMed at the same allocation (unconfirmed whether that run had the fixed parsers.py).
+  Next: llama-cpp-server backend. Set PADDLE_VL_SERVER_URL=http://127.0.0.1:8111/v1; llama-server serves
+  PaddlePaddle/PaddleOCR-VL-1.6-GGUF (936 MB model + 882 MB mmproj). MSI driver is CUDA 13.3, so use the
+  llama.cpp win-cuda-12.4 build, not 13.4. Fallback: PADDLE_VL_MAX_PIXELS=501760.
+- Merge accident on main: ae15198 moved run_batch.py/score.py into src_win, the flattening deleted src_win,
+  so both vanished; restored from 6129b45 and recommitted.
 - GLM-OCR (via Ollama glm-ocr:latest) not run yet. No paddleocr-vl or glm-ocr scores yet.

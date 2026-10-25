@@ -90,7 +90,9 @@ def run_paddleocr_vl(path: Path):
     Low-VRAM settings: GPUs without bfloat16 (RTX 20xx) load the model in float32 (~4 GB), so
     pages go through one at a time (the default queues 64, layout model 8 per batch).
     PADDLE_VL_MAX_PIXELS optionally lowers the per-region image cap (pipeline default 1003520,
-    ~1.0 MP); lower values save memory but can blur small table text."""
+    ~1.0 MP); lower values save memory but can blur small table text.
+    PADDLE_VL_SERVER_URL sends the VLM step to a server instead (default backend llama-cpp-server,
+    override with PADDLE_VL_BACKEND); only the small layout model then runs in this process."""
     global _paddle_vl
     if _paddle_vl is None:
         from paddleocr import PaddleOCRVL
@@ -100,7 +102,11 @@ def run_paddleocr_vl(path: Path):
         config["batch_size"] = int(os.environ.get("PADDLE_VL_PAGE_BATCH", "1"))
         config["use_queues"] = False
         config["SubModules"]["LayoutDetection"]["batch_size"] = 1
-        _paddle_vl = PaddleOCRVL(pipeline_version="v1.6", paddlex_config=config)
+        server = os.environ.get("PADDLE_VL_SERVER_URL")  # e.g. llama.cpp: http://127.0.0.1:8111/v1
+        backend = {"vl_rec_backend": os.environ.get("PADDLE_VL_BACKEND", "llama-cpp-server"),
+                   "vl_rec_server_url": server} if server else {}
+        print(f"           PaddleOCR-VL backend: {backend or 'native (in-process)'}", flush=True)
+        _paddle_vl = PaddleOCRVL(pipeline_version="v1.6", paddlex_config=config, **backend)
     kwargs = {}
     if os.environ.get("PADDLE_VL_MAX_PIXELS"):
         kwargs["max_pixels"] = int(os.environ["PADDLE_VL_MAX_PIXELS"])
