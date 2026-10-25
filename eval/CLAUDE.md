@@ -79,7 +79,13 @@ One copy of every script lives in eval/; it runs unchanged on Mac and Windows. N
   the MSI run still OOMed at the same allocation (unconfirmed whether that run had the fixed parsers.py).
   Next: llama-cpp-server backend. Set PADDLE_VL_SERVER_URL=http://127.0.0.1:8111/v1; llama-server serves
   PaddlePaddle/PaddleOCR-VL-1.6-GGUF (936 MB model + 882 MB mmproj). MSI driver is CUDA 13.3, so use the
-  llama.cpp win-cuda-12.4 build, not 13.4. Fallback: PADDLE_VL_MAX_PIXELS=501760.
+  llama.cpp win-cuda-12.4 build, not 13.4. The official GGUF is BF16 (no bf16 on RTX 2060), so convert it:
+  `llama-quantize.exe PaddleOCR-VL-1.6-GGUF.gguf PaddleOCR-VL-1.6-F16.gguf F16` and serve the F16 file with
+  `-ngl 99 -c 16384` (default ctx 131072 x 4 slots wastes memory). A stale server can keep port 8111:
+  `taskkill /IM llama-server.exe /F`; curl /v1/models shows n_ctx and ftype of the server answering.
+  The llama-cpp-server backend ignores max_pixels/min_pixels (PADDLE_VL_MAX_PIXELS has no effect there).
+- First working run (llama.cpp F16 server, fully serial client): 2310.14021, 25 pages in 287 s (~11.5 s/page,
+  incl. warm-up), 146k chars. parsers.py then re-enabled queues + page batch 8 in server mode; re-time it.
 - Merge accident on main: ae15198 moved run_batch.py/score.py into src_win, the flattening deleted src_win,
   so both vanished; restored from 6129b45 and recommitted.
 - GLM-OCR (via Ollama glm-ocr:latest) not run yet. No paddleocr-vl or glm-ocr scores yet.
