@@ -25,7 +25,8 @@ MATCH_MIN = 0.25  # minimum content overlap (F1) to call a parsed table "the sam
 
 NOTES = [
     "Gold tables come from the papers' LaTeX source, so they are exact, but only for tables that exist in the source (not tables embedded as images).",
-    "Cells containing math or unresolved LaTeX macros are marked uncertain and excluded from scoring.",
+    "Cells containing math, unresolved LaTeX macros, or citations and cross-references (\\cite, \\ref: the PDF shows text that depends on the bibliography) are marked uncertain and excluded from scoring.",
+        "One gold table (1812.03651 T1) has a two-line header written as two LaTeX rows but shown as one row in the PDF; those rows were merged by hand (ROW_MERGES in gold_tables.py).",
     "Position accuracy is strict: a cell is right only if the same text sits at the same row and column. Merged or shifted headers lower it.",
     "Content recall asks whether the gold cell's text appears anywhere in the matched table, so it ignores structure.",
     "Text coverage compares words in the output with the PDF's own text layer. It is a rough omission check, not a quality score.",

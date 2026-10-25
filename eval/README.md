@@ -1,11 +1,11 @@
-# Docling vs LlamaParse evaluation
+# Parser evaluation
 
-Scores two document parsers on table extraction and text coverage, using ground truth
+Scores document parsers (Docling, small OCR vision models, LlamaParse) on table extraction and text coverage, using ground truth
 taken from the LaTeX source of 11 arXiv database papers. You run the parsers yourself.
 
 ## Run it
 
-    cd ~/Downloads/doc_parsing_samples/eval
+    cd doc-parser/eval
     python3 -m venv .venv && source .venv/bin/activate
     pip install docling requests pypdf
 
@@ -18,6 +18,13 @@ taken from the LaTeX source of 11 arXiv database papers. You run the parsers you
     # 1c. Docling's vision-model pipeline (Granite-Docling). Much slower on CPU; try one paper first:
     #     uv pip install mlx-vlm   (Apple Silicon; otherwise it falls back to transformers)
     python3 run_batch.py --engine docling-vlm --only 2310.14021
+
+    # 1d. Small document models, local GPU. Each needs its OWN environment (on Windows,
+    #     Paddle and CUDA PyTorch cannot load in one process). See CLAUDE.md for the setup.
+    #     PaddleOCR-VL-1.6: env with paddlepaddle-gpu + "paddleocr[doc-parser]", no torch.
+    <paddle-env-python> run_batch.py --engine paddleocr-vl --only 2310.14021
+    #     GLM-OCR: Ollama serving glm-ocr:latest + env with "glmocr[selfhosted]"; glm_ocr.yaml keeps it local.
+    <glm-env-python> run_batch.py --engine glm-ocr --only 2310.14021
 
     # 2. LlamaParse (cloud, uploads the PDFs; these are public papers only)
     export LLAMA_CLOUD_API_KEY=...
@@ -43,7 +50,8 @@ seconds per page.
 | File | Role |
 |---|---|
 | `gold_tables.py` | Builds `gold_tables.json` from the LaTeX tarballs (already generated) |
-| `parsers.py` | `run_docling`, `run_llamaparse` |
+| `parsers.py` | One adapter per engine (Docling variants, PaddleOCR-VL, GLM-OCR, LlamaParse) |
+| `glm_ocr.yaml` | GLM-OCR config: local Ollama, cloud mode off |
 | `run_batch.py` | Runs an engine over all papers into `outputs/<engine>/` |
 | `score.py` | Compares outputs with gold; writes `results.json`, `texts.json`, `results.csv` |
 | `build_report.py` + `report_template.html` | Builds the self-contained `report.html` |

@@ -685,295 +685,296 @@
      ],
      [
       false,
+      true,
+      true
+     ],
+     [
       false,
+      true,
       false
      ],
      [
       false,
-      false,
+      true,
       false
      ],
      [
       false,
+      true,
+      true
+     ],
+     [
       false,
+      true,
+      true
+     ],
+     [
+      false,
+      true,
       false
      ],
      [
       false,
-      false,
-      false
-     ],
-     [
-      false,
-      false,
-      false
-     ],
-     [
-      false,
-      false,
-      false
-     ],
-     [
-      false,
-      false,
+      true,
       false
      ],
      [
       true,
-      false,
+      true,
       false
      ],
      [
       true,
-      false,
+      true,
       false
      ],
      [
       false,
-      false,
+      true,
       false
      ],
      [
       false,
-      false,
+      true,
       false
      ],
      [
       false,
+      true,
+      true
+     ],
+     [
       false,
+      true,
       false
      ],
      [
       false,
-      false,
+      true,
       false
      ],
      [
       false,
+      true,
+      true
+     ],
+     [
       false,
+      true,
+      true
+     ],
+     [
+      false,
+      true,
       false
      ],
      [
       false,
-      false,
+      true,
       false
      ],
      [
       false,
-      false,
+      true,
       false
      ],
      [
       false,
-      false,
+      true,
       false
      ],
      [
       false,
-      false,
+      true,
       false
      ],
      [
       false,
-      false,
+      true,
       false
      ],
      [
       false,
-      false,
+      true,
       false
      ],
      [
       false,
-      false,
+      true,
       false
      ],
      [
       false,
+      true,
+      true
+     ],
+     [
       false,
+      true,
       false
      ],
      [
       false,
-      false,
-      false
+      true,
+      true
      ],
      [
       false,
-      false,
-      false
+      true,
+      true
      ],
      [
       false,
-      false,
-      false
-     ],
-     [
-      false,
-      false,
-      false
-     ],
-     [
-      false,
-      false,
-      false
-     ],
-     [
-      false,
-      false,
-      false
-     ],
-     [
-      false,
-      false,
+      true,
       false
      ],
      [
       true,
-      false,
+      true,
       false
      ],
      [
       false,
-      false,
+      true,
       false
      ],
      [
       false,
+      true,
+      true
+     ],
+     [
       false,
+      true,
       false
      ],
      [
       false,
-      false,
+      true,
       false
      ],
      [
       false,
-      false,
+      true,
       false
      ],
      [
       false,
-      false,
+      true,
       false
      ],
      [
       false,
-      false,
+      true,
       false
      ],
      [
       false,
+      true,
+      true
+     ],
+     [
       false,
+      true,
       false
      ],
      [
       false,
-      false,
+      true,
       false
      ],
      [
       false,
+      true,
+      true
+     ],
+     [
       false,
+      true,
       false
      ],
      [
       false,
+      true,
+      true
+     ],
+     [
       false,
+      true,
       false
      ],
      [
       false,
+      true,
+      true
+     ],
+     [
       false,
+      true,
       false
      ],
      [
       false,
+      true,
+      true
+     ],
+     [
       false,
+      true,
       false
      ],
      [
       false,
-      false,
+      true,
       false
      ],
      [
       false,
+      true,
+      true
+     ],
+     [
       false,
+      true,
+      true
+     ],
+     [
+      false,
+      true,
       false
      ],
      [
       false,
-      false,
+      true,
       false
      ],
      [
       false,
-      false,
+      true,
       false
      ],
      [
       false,
+      true,
+      true
+     ],
+     [
       false,
+      true,
       false
      ],
      [
       false,
-      false,
-      false
-     ],
-     [
-      false,
-      false,
-      false
-     ],
-     [
-      false,
-      false,
-      false
-     ],
-     [
-      false,
-      false,
-      false
-     ],
-     [
-      false,
-      false,
-      false
-     ],
-     [
-      false,
-      false,
-      false
-     ],
-     [
-      false,
-      false,
-      false
-     ],
-     [
-      false,
-      false,
-      false
-     ],
-     [
-      false,
-      false,
-      false
-     ],
-     [
-      false,
-      false,
-      false
+      true,
+      true
      ]
     ],
     "warnings": [
      "\\Delta",
      "\\Gamma",
      "\\langlek",
-     "\\rangle"
+     "\\rangle",
+     "cite"
     ],
     "n_rows": 58,
     "n_cols": 3,
@@ -1244,15 +1245,7 @@
       false
      ],
      [
-      false,
-      false,
-      false,
-      false,
-      false,
-      false
-     ],
-     [
-      false,
+      true,
       false,
       false,
       false,
@@ -1260,7 +1253,15 @@
       false
      ],
      [
+      true,
       false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      true,
       false,
       false,
       false,
@@ -1268,7 +1269,9 @@
       false
      ]
     ],
-    "warnings": [],
+    "warnings": [
+     "cite"
+    ],
     "n_rows": 13,
     "n_cols": 6,
     "degenerate": false,
@@ -1371,21 +1374,12 @@
     "rows": [
      [
       "",
-      "Func. Invoc.",
-      "Lambda I/O",
-      "Lambda I/O",
-      "EC2 I/O",
-      "EC2 I/O",
-      "EC2 NW"
-     ],
-     [
-      "",
-      "(1KB)",
-      "(S3)",
-      "(DynamoDB)",
-      "(S3)",
-      "(DynamoDB)",
-      "(0MQ)"
+      "Func. Invoc. (1KB)",
+      "Lambda I/O (S3)",
+      "Lambda I/O (DynamoDB)",
+      "EC2 I/O (S3)",
+      "EC2 I/O (DynamoDB)",
+      "EC2 NW (0MQ)"
      ],
      [
       "Latency",
@@ -1433,22 +1427,16 @@
       false,
       false,
       false
-     ],
-     [
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false
      ]
     ],
     "warnings": [],
-    "n_rows": 4,
+    "n_rows": 3,
     "n_cols": 7,
     "degenerate": false,
-    "pdf_cell_match": 1.0,
+    "notes": [
+     "rows 0 and 1 merged (two-line header)"
+    ],
+    "pdf_cell_match": 0.68,
     "usable": true
    }
   ],
@@ -1498,31 +1486,32 @@
      [
       false,
       false,
-      false
+      true
      ],
      [
       false,
       false,
-      false
+      true
      ],
      [
       false,
       false,
-      false
+      true
      ],
      [
       false,
       false,
-      false
+      true
      ],
      [
       false,
       false,
-      false
+      true
      ]
     ],
     "warnings": [
-     "\\system"
+     "\\system",
+     "cite"
     ],
     "n_rows": 6,
     "n_cols": 3,
@@ -3421,7 +3410,22 @@
      ],
      [
       false,
+      true,
+      false
+     ],
+     [
       false,
+      false,
+      false
+     ],
+     [
+      false,
+      true,
+      false
+     ],
+     [
+      false,
+      true,
       false
      ],
      [
@@ -3441,26 +3445,13 @@
      ],
      [
       false,
-      false,
-      false
-     ],
-     [
-      false,
-      false,
-      false
-     ],
-     [
-      false,
-      false,
-      false
-     ],
-     [
-      false,
-      false,
+      true,
       false
      ]
     ],
-    "warnings": [],
+    "warnings": [
+     "cite"
+    ],
     "n_rows": 9,
     "n_cols": 3,
     "degenerate": false,
@@ -3515,28 +3506,29 @@
       false
      ],
      [
-      false,
-      false,
-      false
-     ],
-     [
-      false,
+      true,
       false,
       false
      ],
      [
-      false,
+      true,
       false,
       false
      ],
      [
+      true,
       false,
+      false
+     ],
+     [
+      true,
       false,
       false
      ]
     ],
     "warnings": [
-     "\\nobreakdash"
+     "\\nobreakdash",
+     "cite"
     ],
     "n_rows": 6,
     "n_cols": 3,
@@ -3607,13 +3599,7 @@
      ],
      [
       false,
-      false,
-      false,
-      false
-     ],
-     [
-      false,
-      false,
+      true,
       false,
       false
      ],
@@ -3625,30 +3611,38 @@
      ],
      [
       false,
-      false,
-      false,
-      false
-     ],
-     [
-      false,
-      false,
+      true,
       false,
       false
      ],
      [
       false,
-      false,
+      true,
       false,
       false
      ],
      [
       false,
+      true,
       false,
+      false
+     ],
+     [
+      false,
+      true,
+      false,
+      false
+     ],
+     [
+      false,
+      true,
       false,
       false
      ]
     ],
-    "warnings": [],
+    "warnings": [
+     "cite"
+    ],
     "n_rows": 8,
     "n_cols": 4,
     "degenerate": false,
@@ -3884,7 +3878,18 @@
      ],
      [
       false,
+      true,
       false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      true,
       false,
       false,
       false,
@@ -3928,7 +3933,40 @@
      ],
      [
       false,
+      true,
       false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      true,
       false,
       false,
       false,
@@ -3950,18 +3988,7 @@
      ],
      [
       false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false
-     ],
-     [
-      false,
-      false,
+      true,
       false,
       false,
       false,
@@ -3983,18 +4010,7 @@
      ],
      [
       false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false
-     ],
-     [
-      false,
-      false,
+      true,
       false,
       false,
       false,
@@ -4005,18 +4021,7 @@
      ],
      [
       false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false
-     ],
-     [
-      false,
-      false,
+      true,
       false,
       false,
       false,
@@ -4027,18 +4032,7 @@
      ],
      [
       false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false
-     ],
-     [
-      false,
-      false,
+      true,
       false,
       false,
       false,
@@ -4049,7 +4043,7 @@
      ],
      [
       false,
-      false,
+      true,
       false,
       false,
       false,
@@ -4062,7 +4056,8 @@
     "warnings": [
      "\\tnotea",
      "\\tnoteb",
-     "\\tnotec"
+     "\\tnotec",
+     "cite"
     ],
     "n_rows": 18,
     "n_cols": 9,
@@ -4468,7 +4463,172 @@
       false
      ],
      [
+      true,
       false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      true,
       false,
       false,
       false,
@@ -4543,22 +4703,7 @@
       false
      ],
      [
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false
-     ],
-     [
-      false,
+      true,
       false,
       false,
       false,
@@ -4573,22 +4718,7 @@
       false
      ],
      [
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false
-     ],
-     [
-      false,
+      true,
       false,
       false,
       false,
@@ -4603,22 +4733,7 @@
       false
      ],
      [
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false
-     ],
-     [
-      false,
+      true,
       false,
       false,
       false,
@@ -4633,22 +4748,7 @@
       false
      ],
      [
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false
-     ],
-     [
-      false,
+      true,
       false,
       false,
       false,
@@ -4663,22 +4763,7 @@
       false
      ],
      [
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false
-     ],
-     [
-      false,
+      true,
       false,
       false,
       false,
@@ -4693,97 +4778,7 @@
       false
      ],
      [
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false
-     ],
-     [
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false
-     ],
-     [
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false
-     ],
-     [
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false
-     ],
-     [
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false
-     ],
-     [
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false
-     ],
-     [
-      false,
+      true,
       false,
       false,
       false,
@@ -4798,7 +4793,9 @@
       false
      ]
     ],
-    "warnings": [],
+    "warnings": [
+     "cite"
+    ],
     "n_rows": 24,
     "n_cols": 13,
     "degenerate": false,
@@ -4863,43 +4860,45 @@
       false
      ],
      [
-      false,
-      false,
-      false,
-      false
-     ],
-     [
-      false,
+      true,
       false,
       false,
       false
      ],
      [
-      false,
-      false,
-      false,
-      false
-     ],
-     [
-      false,
+      true,
       false,
       false,
       false
      ],
      [
-      false,
+      true,
       false,
       false,
       false
      ],
      [
+      true,
       false,
+      false,
+      false
+     ],
+     [
+      true,
+      false,
+      false,
+      false
+     ],
+     [
+      true,
       false,
       false,
       false
      ]
     ],
-    "warnings": [],
+    "warnings": [
+     "cite"
+    ],
     "n_rows": 7,
     "n_cols": 4,
     "degenerate": false,
@@ -4974,13 +4973,7 @@
       false
      ],
      [
-      false,
-      false,
-      false,
-      false
-     ],
-     [
-      false,
+      true,
       false,
       false,
       false
@@ -4992,37 +4985,45 @@
       false
      ],
      [
-      false,
-      false,
-      false,
-      false
-     ],
-     [
-      false,
+      true,
       false,
       false,
       false
      ],
      [
-      false,
-      false,
-      false,
-      false
-     ],
-     [
-      false,
+      true,
       false,
       false,
       false
      ],
      [
+      true,
       false,
+      false,
+      false
+     ],
+     [
+      true,
+      false,
+      false,
+      false
+     ],
+     [
+      true,
+      false,
+      false,
+      false
+     ],
+     [
+      true,
       false,
       false,
       false
      ]
     ],
-    "warnings": [],
+    "warnings": [
+     "cite"
+    ],
     "n_rows": 9,
     "n_cols": 4,
     "degenerate": false,

@@ -207,6 +207,9 @@ def parse_rows(body, warn):
                 i = skip_ws(cell, i)
                 cell = group(cell, i)[0] if i < len(cell) and cell[i] == "{" else ""
             before = len(warn)
+            if CITE_RE.search(cell):
+                # The PDF shows "[24]" or "[Author, 2011]" here, which depends on the bibliography.
+                warn.append("cite")
             row.append(clean_cell(cell, warn))
             urow.append(len(warn) > before)
             row.extend([""] * (span - 1))
@@ -218,6 +221,8 @@ def parse_rows(body, warn):
     return ([r + [""] * (width - len(r)) for r in out],
             [u + [False] * (width - len(u)) for u in unc])
 
+
+CITE_RE = re.compile(r"\\(?:cite[A-Za-z]*|ref|autoref|eqref|cref|Cref)\*?\s*(?:\[[^\]]*\]\s*)*\{")
 
 BEGIN = re.compile(r"\\begin\{(tabular\*|tabularx|tabulary|longtable|longtabu|tabu|tabular)\}")
 
@@ -367,6 +372,20 @@ def extract_paper(text):
     return tables
 
 
+# Verified by hand against the PDF: the LaTeX writes a two-line header as two rows,
+# but the PDF shows one header row (each cell wraps over two lines).
+ROW_MERGES = {("1812.03651", "T1"): (0, 1)}
+
+
+def merge_rows(t, a, b):
+    t["rows"][a] = [(x + " " + y).strip() for x, y in zip(t["rows"][a], t["rows"][b])]
+    t["uncertain"][a] = [x or y for x, y in zip(t["uncertain"][a], t["uncertain"][b])]
+    del t["rows"][b], t["uncertain"][b]
+    t["n_rows"] = len(t["rows"])
+    t["degenerate"] = t["n_rows"] < 2 or t["n_cols"] < 2
+    t.setdefault("notes", []).append(f"rows {a} and {b} merged (two-line header)")
+
+
 def main():
     papers_dir, out_json = Path(sys.argv[1]), Path(sys.argv[2])
     result, summary = {}, []
@@ -382,6 +401,9 @@ def main():
             summary.append((pid, "no .tex files", 0, 0, 0, None))
             continue
         tables = extract_paper(text)
+        for t in tables:
+            if (pid, t["id"]) in ROW_MERGES:
+                merge_rows(t, *ROW_MERGES[(pid, t["id"])])
         ptxt = pdf_norm_text(papers_dir / f"{pid}.pdf")
         for t in tables:
             cells = [c for r in t["rows"] for c in r if len(norm(c)) >= 3]
