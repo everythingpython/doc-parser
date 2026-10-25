@@ -1,0 +1,5034 @@
+{
+ "papers": {
+  "1512.00168": [
+   {
+    "id": "I1",
+    "kind": "inline",
+    "caption": "",
+    "rows": [
+     [
+      "Linearizability(F)",
+      "SingleOrder RealTime RVal(F)"
+     ],
+     [
+      "SingleOrder",
+      "H' op H : op.oval = : vis = ar (H' × H)"
+     ],
+     [
+      "RealTime",
+      "rb ar"
+     ],
+     [
+      "Regular(F)",
+      "SingleOrder RealTimeWrites RVal(F)"
+     ],
+     [
+      "Safe(F)",
+      "SingleOrder RealTimeWrites SeqRVal(F)"
+     ],
+     [
+      "RealTimeWrites",
+      "rb|_wr → op ar"
+     ],
+     [
+      "SeqRVal(F)",
+      "op H : Concur(op)= op.oval F(op, cxt(A ,op))"
+     ],
+     [
+      "EventualConsistency(F)",
+      "EventualVisibility NoCircularCausality RVal(F)"
+     ],
+     [
+      "EventualVisibility",
+      "a H, [f] H/≈_ss : | b [f] : (a []rb b) (a b)| <"
+     ],
+     [
+      "NoCircularCausality",
+      "acyclic(hb)"
+     ],
+     [
+      "StrongConvergence",
+      "a,b H|_rd: vis^-1(a)|_wr=vis^-1(b)|_wr a.oval = b.oval"
+     ],
+     [
+      "StrongEventualCons.(F)",
+      "EventualConsistency(F) StrongConvergence"
+     ],
+     [
+      "QuiescentConsistency(F)",
+      "|H|_wr| < C C : [f] H/≈_ss : |op [f]: op.oval F(op,C) | <"
+     ],
+     [
+      "PRAM",
+      "so vis"
+     ],
+     [
+      "SequentialConsistency(F)",
+      "SingleOrder PRAMConsistency RVal(F)"
+     ],
+     [
+      "MonotonicReads",
+      "a H, b,c H|_rd : a []vis b b []so c a []vis c (vis;so|_rd → rd) vis"
+     ],
+     [
+      "ReadYourWrites",
+      "a H|_wr, b H|_rd : a []so b a []vis b so|_wr → rd vis"
+     ],
+     [
+      "MonotonicWrites",
+      "a, b H|_wr : a []so b a []ar b so|_wr → wr ar"
+     ],
+     [
+      "WritesFollowReads",
+      "a,c H|_wr, b H|_rd : a []vis b b []so c a []ar c (vis;so|_rd → wr) ar"
+     ],
+     [
+      "CausalVisibility",
+      "hb vis"
+     ],
+     [
+      "CausalArbitration",
+      "hb ar"
+     ],
+     [
+      "Causality(F)",
+      "CausalVisibility CausalArbitration RVal(F)"
+     ],
+     [
+      "Causal+(F)",
+      "Causality(F) StrongConvergence"
+     ],
+     [
+      "RealTimeCausality(F)",
+      "Causality(F) RealTime"
+     ],
+     [
+      "TimedVisibility( )",
+      "a H|_wr, b H, t Time : a.rtime = t b.stime = t + a []vis b"
+     ],
+     [
+      "TimedCausality(F, )",
+      "Causality(F) TimedVisibility( )"
+     ],
+     [
+      "TimedLinearizability(F, )",
+      "SingleOrder TimedVisibility( ) RVal(F)"
+     ],
+     [
+      "PrefixSequential(F)",
+      "SingleOrder MonotonicWrites RVal(F)"
+     ],
+     [
+      "PrefixLinearizable(F)",
+      "SingleOrder RealTimeWW RVal(F)"
+     ],
+     [
+      "RealTimeWW",
+      "rb|_wr → wr ar"
+     ],
+     [
+      "K-Linearizable(F,K)",
+      "SingleOrder RealTimeWW K-RealTimeReads(K) RVal(F)"
+     ],
+     [
+      "K-RealTimeReads(K)",
+      "a H|_wr, b H|_rd, PW H|_wr, pw PW: |PW|<K a []arpw pw []rbb a []rbb a []arb"
+     ],
+     [
+      "ForkLinearizability(F)",
+      "PRAM RealTime NoJoin (F)"
+     ],
+     [
+      "NoJoin",
+      "a_i,b_i,a_j,b_j H: a_i ≈_ss a_j (a_i,a_j) ar vis a_i _so b_i a_j _so b_j (b_i,b_j),(b_j,b_i) vis"
+     ],
+     [
+      "Fork*(F)",
+      "ReadYourWrites RealTime AtMostOneJoin (F)"
+     ],
+     [
+      "AtMostOneJoin",
+      "a_i,a_j H: a_i ≈_ss a_j (a_i,a_j) ar vis | b_i H: a_i _so b_i ( b_j H: a_j _so b_j b_i []visb_j| ≤ 1 | b_j H: a_j _so b_j ( b_i H: a_i _so b_i b_j []visb_i| ≤ 1"
+     ],
+     [
+      "ForkSequential(F)",
+      "PRAM NoJoin (F)"
+     ],
+     [
+      "WeakForkLin(F)",
+      "PRAM K-RealTime(2) AtMostOneJoin (F)"
+     ],
+     [
+      "PerObjectPRAM",
+      "(so ob) vis"
+     ],
+     [
+      "PerObjectSingleOrder",
+      "H' op H : op.oval = : ar ob = vis ob (H' × H)"
+     ],
+     [
+      "PerObjectSequential(F)",
+      "PerObjectSingleOrder PerObjectPRAM (F)"
+     ],
+     [
+      "ProcessorConsistency(F)",
+      "PerObjectSingleOrder PRAM (F)"
+     ],
+     [
+      "PerObjectHappensBefore",
+      "hbo ((so ob) vis)^+"
+     ]
+    ],
+    "uncertain": [
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      false
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      true,
+      true
+     ],
+     [
+      true,
+      true
+     ],
+     [
+      true,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ],
+     [
+      false,
+      true
+     ]
+    ],
+    "warnings": [
+     "\\Delta",
+     "\\Rightarrow",
+     "\\cap",
+     "\\cup",
+     "\\emptyset",
+     "\\exists",
+     "\\forall",
+     "\\in",
+     "\\infty",
+     "\\nabla",
+     "\\not",
+     "\\notin",
+     "\\preceq",
+     "\\setminus",
+     "\\subseteq",
+     "\\triangleq",
+     "\\wedge",
+     "\\wedgeRVal",
+     "\\xnrightarrowvis",
+     "\\xrightarrow"
+    ],
+    "n_rows": 43,
+    "n_cols": 2,
+    "degenerate": false,
+    "pdf_cell_match": 0.92,
+    "usable": true
+   },
+   {
+    "id": "I2",
+    "kind": "inline",
+    "caption": "",
+    "rows": [
+     [
+      "Models",
+      "Definitions",
+      "Implementations"
+     ],
+     [
+      "Atomicity",
+      "",
+      ""
+     ],
+     [
+      "Bounded fork-join causal",
+      "",
+      "-"
+     ],
+     [
+      "Bounded staleness",
+      "",
+      "-"
+     ],
+     [
+      "Causal",
+      "",
+      ""
+     ],
+     [
+      "Causal+",
+      "",
+      ""
+     ],
+     [
+      "Coherence",
+      "",
+      "-"
+     ],
+     [
+      "Conit",
+      "",
+      "-"
+     ],
+     [
+      "-atomicity",
+      "",
+      "-"
+     ],
+     [
+      "-atomicity",
+      "",
+      "-"
+     ],
+     [
+      "Delta",
+      "",
+      "-"
+     ],
+     [
+      "Entry",
+      "",
+      "-"
+     ],
+     [
+      "Eventual",
+      "",
+      ""
+     ],
+     [
+      "Eventual linearizability",
+      "",
+      "-"
+     ],
+     [
+      "Eventual serializability",
+      "",
+      "-"
+     ],
+     [
+      "Fork*",
+      "",
+      ""
+     ],
+     [
+      "Fork",
+      "",
+      ""
+     ],
+     [
+      "Fork-join causal",
+      "",
+      "-"
+     ],
+     [
+      "Fork-sequential",
+      "",
+      "-"
+     ],
+     [
+      "Hybrid",
+      "",
+      "-"
+     ],
+     [
+      "K-atomic",
+      "",
+      "-"
+     ],
+     [
+      "K-regular",
+      "",
+      "-"
+     ],
+     [
+      "K-safe",
+      "",
+      "-"
+     ],
+     [
+      "k-staleness",
+      "",
+      "-"
+     ],
+     [
+      "Lazy release",
+      "",
+      "-"
+     ],
+     [
+      "Linearizability",
+      "",
+      ""
+     ],
+     [
+      "Location",
+      "",
+      "-"
+     ],
+     [
+      "Monotonic reads",
+      "",
+      ""
+     ],
+     [
+      "Monotonic writes",
+      "",
+      ""
+     ],
+     [
+      "Observable causal",
+      "",
+      "-"
+     ],
+     [
+      "PBS , t -staleness",
+      "",
+      "-"
+     ],
+     [
+      "Per-object causal",
+      "",
+      "-"
+     ],
+     [
+      "Per-record timeline",
+      "",
+      ""
+     ],
+     [
+      "PRAM",
+      "",
+      "-"
+     ],
+     [
+      "Prefix",
+      "",
+      "-"
+     ],
+     [
+      "Processor",
+      "",
+      "-"
+     ],
+     [
+      "Quiescent",
+      "",
+      "-"
+     ],
+     [
+      "Rationing",
+      "",
+      "-"
+     ],
+     [
+      "Read-your-writes",
+      "",
+      ""
+     ],
+     [
+      "Real-time causal",
+      "",
+      "-"
+     ],
+     [
+      "RedBlue",
+      "",
+      "-"
+     ],
+     [
+      "Regular",
+      "",
+      ""
+     ],
+     [
+      "Release",
+      "",
+      "-"
+     ],
+     [
+      "Safe",
+      "",
+      ""
+     ],
+     [
+      "Scope",
+      "",
+      "-"
+     ],
+     [
+      "Sequential",
+      "",
+      ""
+     ],
+     [
+      "Slow",
+      "",
+      "-"
+     ],
+     [
+      "Strong eventual",
+      "",
+      ""
+     ],
+     [
+      "Timed causal",
+      "",
+      "-"
+     ],
+     [
+      "Timed serial",
+      "",
+      "-"
+     ],
+     [
+      "Timeline",
+      "",
+      ""
+     ],
+     [
+      "Tunable",
+      "",
+      ""
+     ],
+     [
+      "t-visibility",
+      "",
+      "-"
+     ],
+     [
+      "Vector-field",
+      "",
+      "-"
+     ],
+     [
+      "Weak",
+      "",
+      "-"
+     ],
+     [
+      "Weak fork-linearizability",
+      "",
+      ""
+     ],
+     [
+      "Weak ordering",
+      "",
+      "-"
+     ],
+     [
+      "Writes-follow-reads",
+      "",
+      ""
+     ]
+    ],
+    "uncertain": [
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      true,
+      false,
+      false
+     ],
+     [
+      true,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      true,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ]
+    ],
+    "warnings": [
+     "\\Delta",
+     "\\Gamma",
+     "\\langlek",
+     "\\rangle"
+    ],
+    "n_rows": 58,
+    "n_cols": 3,
+    "degenerate": false,
+    "pdf_cell_match": 0.97,
+    "usable": true
+   }
+  ],
+  "1712.01208": [
+   {
+    "id": "T1",
+    "kind": "float",
+    "caption": "Hash-map alternative baselines",
+    "rows": [
+     [
+      "Type",
+      "Time (ns)",
+      "Utilization"
+     ],
+     [
+      "AVX Cuckoo, 32-bit value",
+      "31ns",
+      "99%"
+     ],
+     [
+      "AVX Cuckoo, 20 Byte record",
+      "43ns",
+      "99%"
+     ],
+     [
+      "Comm. Cuckoo, 20Byte record",
+      "90ns",
+      "95%"
+     ],
+     [
+      "In-place chained Hash-map with learned hash functions, record",
+      "35ns",
+      "100%"
+     ]
+    ],
+    "uncertain": [
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      true,
+      false,
+      false
+     ]
+    ],
+    "warnings": [
+     "\\xspace"
+    ],
+    "n_rows": 5,
+    "n_cols": 3,
+    "degenerate": false,
+    "pdf_cell_match": 1.0,
+    "usable": true
+   }
+  ],
+  "1802.10233": [
+   {
+    "id": "T1",
+    "kind": "float",
+    "caption": "List of systems that embed Calcite.",
+    "rows": [
+     [
+      "System",
+      "Query Language",
+      "JDBC Driver",
+      "SQL Parser and Validator",
+      "Relational Algebra",
+      "Execution Engine"
+     ],
+     [
+      "Apache Drill",
+      "SQL + extensions",
+      "✓",
+      "✓",
+      "✓",
+      "Native"
+     ],
+     [
+      "Apache Hive",
+      "SQL + extensions",
+      "",
+      "",
+      "✓",
+      "Apache Tez, Apache Spark"
+     ],
+     [
+      "Apache Solr",
+      "SQL",
+      "✓",
+      "✓",
+      "✓",
+      "Native, Enumerable, Apache Lucene"
+     ],
+     [
+      "Apache Phoenix",
+      "SQL",
+      "✓",
+      "✓",
+      "✓",
+      "Apache HBase"
+     ],
+     [
+      "Apache Kylin",
+      "SQL",
+      "✓",
+      "✓",
+      "",
+      "Enumerable, Apache HBase"
+     ],
+     [
+      "Apache Apex",
+      "Streaming SQL",
+      "✓",
+      "✓",
+      "✓",
+      "Native"
+     ],
+     [
+      "Apache Flink",
+      "Streaming SQL",
+      "✓",
+      "✓",
+      "✓",
+      "Native"
+     ],
+     [
+      "Apache Samza",
+      "Streaming SQL",
+      "✓",
+      "✓",
+      "✓",
+      "Native"
+     ],
+     [
+      "Apache Storm",
+      "Streaming SQL",
+      "✓",
+      "✓",
+      "✓",
+      "Native"
+     ],
+     [
+      "MapD",
+      "SQL",
+      "",
+      "✓",
+      "✓",
+      "Native"
+     ],
+     [
+      "Lingual",
+      "SQL",
+      "",
+      "✓",
+      "✓",
+      "Cascading"
+     ],
+     [
+      "Qubole Quark",
+      "SQL",
+      "✓",
+      "✓",
+      "✓",
+      "Apache Hive, Presto"
+     ]
+    ],
+    "uncertain": [
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ]
+    ],
+    "warnings": [],
+    "n_rows": 13,
+    "n_cols": 6,
+    "degenerate": false,
+    "pdf_cell_match": 1.0,
+    "usable": true
+   },
+   {
+    "id": "T2",
+    "kind": "float",
+    "caption": "List of Calcite adapters.",
+    "rows": [
+     [
+      "Adapter",
+      "Target language"
+     ],
+     [
+      "Apache Cassandra",
+      "Cassandra Query Language (CQL)"
+     ],
+     [
+      "Apache Pig",
+      "Pig Latin"
+     ],
+     [
+      "Apache Spark",
+      "Java (Resilient Distributed Datasets)"
+     ],
+     [
+      "Druid",
+      "JSON"
+     ],
+     [
+      "Elasticsearch",
+      "JSON"
+     ],
+     [
+      "JDBC",
+      "SQL (multiple dialects)"
+     ],
+     [
+      "MongoDB",
+      "Java"
+     ],
+     [
+      "Splunk",
+      "SPL"
+     ]
+    ],
+    "uncertain": [
+     [
+      false,
+      false
+     ],
+     [
+      false,
+      false
+     ],
+     [
+      false,
+      false
+     ],
+     [
+      false,
+      false
+     ],
+     [
+      false,
+      false
+     ],
+     [
+      false,
+      false
+     ],
+     [
+      false,
+      false
+     ],
+     [
+      false,
+      false
+     ],
+     [
+      false,
+      false
+     ]
+    ],
+    "warnings": [],
+    "n_rows": 9,
+    "n_cols": 2,
+    "degenerate": false,
+    "pdf_cell_match": 1.0,
+    "usable": true
+   }
+  ],
+  "1812.03651": [
+   {
+    "id": "T1",
+    "kind": "float",
+    "caption": "Latencies. We compare the latency of ``communicating'' 1KB in various ways. To model pure functional event-driven communication, we show the cost of invoking a no-op Lambda function on a 1KB argument, averaged over 1,000 calls. We then show the cost of two explicit 1KB I/Os (write+read) from Python Lambda function and an EC2 instance to S3 and DynamoDB, averaged across 5k trials. Finally we show the cost of direct messaging by measuring a 1KB network message roundtrip, measured using python and the ZeroMQ message library running across two EC2 instances, averaged across 10k trials.",
+    "rows": [
+     [
+      "",
+      "Func. Invoc.",
+      "Lambda I/O",
+      "Lambda I/O",
+      "EC2 I/O",
+      "EC2 I/O",
+      "EC2 NW"
+     ],
+     [
+      "",
+      "(1KB)",
+      "(S3)",
+      "(DynamoDB)",
+      "(S3)",
+      "(DynamoDB)",
+      "(0MQ)"
+     ],
+     [
+      "Latency",
+      "303ms",
+      "108ms",
+      "11ms",
+      "106ms",
+      "11ms",
+      "290μs"
+     ],
+     [
+      "Compared to best",
+      "1,045×",
+      "372×",
+      "37.9×",
+      "365×",
+      "37.9×",
+      "1×"
+     ]
+    ],
+    "uncertain": [
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ]
+    ],
+    "warnings": [],
+    "n_rows": 4,
+    "n_cols": 7,
+    "degenerate": false,
+    "pdf_cell_match": 1.0,
+    "usable": true
+   }
+  ],
+  "1904.03711": [
+   {
+    "id": "T1",
+    "kind": "float",
+    "caption": "Traditional cost-based query optimizer vs. Neo",
+    "rows": [
+     [
+      "",
+      "Traditional Optimizer",
+      "Neural Optimizer ( )"
+     ],
+     [
+      "Creation",
+      "Human developers",
+      "Demonstration, reinforcement learning (Section )"
+     ],
+     [
+      "Query Representation",
+      "Operator tree",
+      "Feature encoding (Section )"
+     ],
+     [
+      "Cost Model",
+      "Hand-crafted model",
+      "Learned DNN model (Section )"
+     ],
+     [
+      "Plan Space Enumeration",
+      "Heuristics, dynamic programming",
+      "DNN-guided search strategy (Section )"
+     ],
+     [
+      "Cardinality Estimation",
+      "Histograms, hand-crafted models",
+      "Histograms, learned embeddings (Section )"
+     ]
+    ],
+    "uncertain": [
+     [
+      false,
+      false,
+      true
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ]
+    ],
+    "warnings": [
+     "\\system"
+    ],
+    "n_rows": 6,
+    "n_cols": 3,
+    "degenerate": false,
+    "pdf_cell_match": 1.0,
+    "usable": true
+   },
+   {
+    "id": "T2",
+    "kind": "float",
+    "caption": "Similarity vs. Cardinality. In this case, correlated keywords and genres, as shown in the SQL query in Figure , also have higher similarity and higher cardinality.",
+    "rows": [
+     [
+      "Keyword",
+      "Genre",
+      "Similarity",
+      "Cardinality"
+     ],
+     [
+      "love",
+      "romance",
+      "0.24",
+      "11128"
+     ],
+     [
+      "love",
+      "action",
+      "0.16",
+      "2157"
+     ],
+     [
+      "love",
+      "horror",
+      "0.09",
+      "1542"
+     ],
+     [
+      "fight",
+      "action",
+      "0.28",
+      "12177"
+     ],
+     [
+      "fight",
+      "romance",
+      "0.21",
+      "3592"
+     ],
+     [
+      "fight",
+      "horror",
+      "0.05",
+      "1104"
+     ]
+    ],
+    "uncertain": [
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ]
+    ],
+    "warnings": [],
+    "n_rows": 7,
+    "n_cols": 4,
+    "degenerate": false,
+    "pdf_cell_match": 0.89,
+    "usable": true
+   },
+   {
+    "id": "I1",
+    "kind": "inline",
+    "caption": "",
+    "rows": [
+     [
+      "",
+      "[width=0.22 ]experiments/postgres.pdf",
+      "[width=0.22 ]experiments/sqlite.pdf",
+      "[width=0.22 ]experiments/mssql.pdf",
+      "[width=0.22 ]experiments/oracle.pdf"
+     ],
+     [
+      "",
+      "[width=0.22 ]experiments/postgres_tpch.pdf",
+      "[width=0.22 ]experiments/sqlite_tpch.pdf",
+      "[width=0.22 ]experiments/mssql_tpch.pdf",
+      "[width=0.22 ]experiments/oracle_tpch.pdf"
+     ],
+     [
+      "",
+      "[width=0.22 ]experiments/postgres_vert.pdf",
+      "[width=0.22 ]experiments/sqlite_vert.pdf",
+      "[width=0.22 ]experiments/mssql_vert.pdf",
+      "[width=0.22 ]experiments/oracle_vert.pdf"
+     ]
+    ],
+    "uncertain": [
+     [
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     [
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     [
+      true,
+      true,
+      true,
+      true,
+      true
+     ]
+    ],
+    "warnings": [
+     "\\JOB",
+     "\\MS",
+     "\\Ora",
+     "\\PG",
+     "\\SQLite",
+     "\\TPC",
+     "\\Vertica",
+     "\\begincenter",
+     "\\endcenter",
+     "\\includegraphics",
+     "\\textwidth"
+    ],
+    "n_rows": 3,
+    "n_cols": 5,
+    "degenerate": false,
+    "pdf_cell_match": 0.0,
+    "usable": false
+   }
+  ],
+  "2309.11322": [
+   {
+    "id": "T1",
+    "kind": "float",
+    "caption": "Comparison of some vector indexing techniques",
+    "rows": [
+     [
+      "",
+      "Characteristics",
+      "Use-cases",
+      "Advantages",
+      "Disadvantages"
+     ],
+     [
+      "Product Quantization",
+      "Divides vectors into smaller parts",
+      "Image search",
+      "Reduces dimensionality",
+      "Lossy compression may reduce accuracy"
+     ],
+     [
+      "Locality-Sensitive Hashing",
+      "Hashes similar vectors to same buckets",
+      "Near-duplicate detection",
+      "Enables approximate similarity search",
+      "Requires parameter tuning"
+     ],
+     [
+      "Hierarchical Navigable Small World",
+      "Creates a hierarchical graph",
+      "Recommendation systems, text search",
+      "Fast neighborhood exploration",
+      "Complex index structure, space overhead"
+     ],
+     [
+      "R-trees",
+      "Hierarchical structure with bounding boxes",
+      "Spatial data (geospatial indexing)",
+      "Efficient range queries, updates",
+      "Slower nearest-neighbor searches"
+     ],
+     [
+      "KD-trees",
+      "Binary tree partitioning along dimensions",
+      "Machine learning, clustering",
+      "Balanced tree structure, good for low dimensions",
+      "Inefficient in high dimensions, complex build"
+     ],
+     [
+      "Random Projection",
+      "Projects high-dimensional data randomly",
+      "Text classification, clustering",
+      "Fast indexing, good for high dimensions",
+      "May lose information, requires tuning"
+     ]
+    ],
+    "uncertain": [
+     [
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false
+     ]
+    ],
+    "warnings": [],
+    "n_rows": 7,
+    "n_cols": 5,
+    "degenerate": false,
+    "pdf_cell_match": 1.0,
+    "usable": true
+   },
+   {
+    "id": "T2",
+    "kind": "float",
+    "caption": "VDBMS features; example use-cases are based on a product's documentation's use-case examples as of August 2023",
+    "rows": [
+     [
+      "",
+      "License",
+      "First release",
+      "Querying with metadata"
+     ],
+     [
+      "Pinecone",
+      "Proprietary",
+      "2021",
+      "rich expressions"
+     ],
+     [
+      "Chroma",
+      "Apache 2.0",
+      "2023",
+      "rich expressions"
+     ],
+     [
+      "Milvus",
+      "Apache 2.0",
+      "2019",
+      "rich expressions"
+     ],
+     [
+      "Weaviate",
+      "BSD 3-clause / proprietary",
+      "2019",
+      "supported"
+     ],
+     [
+      "Qdrant",
+      "Apache 2.0 / proprietary",
+      "2022",
+      "rich expressions"
+     ],
+     [
+      "Deep Lake",
+      "Apache 2.0 / proprietary",
+      "2019",
+      "rich expressions"
+     ],
+     [
+      "",
+      "Integration",
+      "Querying",
+      "Example use-cases"
+     ],
+     [
+      "Pinecone",
+      "OpenAI, LangChain, others",
+      "Java, Python, C#, several others",
+      "chatbots, image search"
+     ],
+     [
+      "Chroma",
+      "LangChain, LlamaIndex",
+      "JavaScript, Python, Ruby, others",
+      "chatbots"
+     ],
+     [
+      "Milvus",
+      "OpenAI, LangChain, others",
+      "Java, Python, Go, Node.js",
+      "chatbots, image/audio/video search"
+     ],
+     [
+      "Weaviate",
+      "OpenAI, Cohere, PaLM",
+      "Java, JavaScript, Python, Go, GraphQL",
+      "chatbots, image search"
+     ],
+     [
+      "Qdrant",
+      "OpenAI, LangChain, others",
+      "Python, JavaScript, Go, Rust",
+      "chatbots, image search"
+     ],
+     [
+      "Deep Lake",
+      "LlamaIndex, LangChain",
+      "Python, SQL-like TQL",
+      "image search"
+     ]
+    ],
+    "uncertain": [
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ]
+    ],
+    "warnings": [],
+    "n_rows": 14,
+    "n_cols": 4,
+    "degenerate": false,
+    "pdf_cell_match": 1.0,
+    "usable": true
+   },
+   {
+    "id": "I1",
+    "kind": "inline",
+    "caption": "",
+    "rows": [
+     [
+      "[backgroundcolor= -gray,escapechar=@] results = collection.search( data=[[3, 8, -1, ...]], anns_field=\"text\", param=search_params, limit=2, expr=\"country like \"Greece \" && type like \"play \"\", output_fields=['title'], consistency_level=\"Strong\" )"
+     ]
+    ],
+    "uncertain": [
+     [
+      true
+     ]
+    ],
+    "warnings": [
+     "\\beginlstlisting",
+     "\\colorlight",
+     "\\endlstlisting"
+    ],
+    "n_rows": 1,
+    "n_cols": 1,
+    "degenerate": true,
+    "pdf_cell_match": 0.0,
+    "usable": false
+   },
+   {
+    "id": "I2",
+    "kind": "inline",
+    "caption": "",
+    "rows": [
+     [
+      "[backgroundcolor= -gray] payload = \"filter\": \"country\": \"Greece\", \"type\": \"play\" , \"includeValues\": True, \"includeMetadata\": True, \"topK\": 2, \"vector\": [3, 8, -1, ...] response = requests.post(url, json=payload)"
+     ]
+    ],
+    "uncertain": [
+     [
+      true
+     ]
+    ],
+    "warnings": [
+     "\\beginlstlisting",
+     "\\colorlight",
+     "\\endlstlisting"
+    ],
+    "n_rows": 1,
+    "n_cols": 1,
+    "degenerate": true,
+    "pdf_cell_match": 0.0,
+    "usable": false
+   },
+   {
+    "id": "I3",
+    "kind": "inline",
+    "caption": "",
+    "rows": [
+     [
+      "[backgroundcolor= -gray,escapechar=@] results = collection.query( query_embeddings=[[3, 8, -1, ...]], n_results=2, where=\"country\": \"Greece\", \"type\": \"play\" )"
+     ]
+    ],
+    "uncertain": [
+     [
+      true
+     ]
+    ],
+    "warnings": [
+     "\\beginlstlisting",
+     "\\colorlight",
+     "\\endlstlisting"
+    ],
+    "n_rows": 1,
+    "n_cols": 1,
+    "degenerate": true,
+    "pdf_cell_match": 0.0,
+    "usable": false
+   },
+   {
+    "id": "I4",
+    "kind": "inline",
+    "caption": "",
+    "rows": [
+     [
+      "[backgroundcolor= -gray] SELECT * FROM plays WHERE country = 'Greece' AND type = 'play' ORDER BY embedding <-> '[3,8,-1, ...]' LIMIT 2;"
+     ]
+    ],
+    "uncertain": [
+     [
+      true
+     ]
+    ],
+    "warnings": [
+     "\\beginlstlisting",
+     "\\colorlight",
+     "\\endlstlisting"
+    ],
+    "n_rows": 1,
+    "n_cols": 1,
+    "degenerate": true,
+    "pdf_cell_match": 0.0,
+    "usable": false
+   }
+  ],
+  "2310.11703": [
+   {
+    "id": "T1",
+    "kind": "float",
+    "caption": "FEATURES OF VECTOR DATABASES",
+    "rows": [
+     [
+      "Database",
+      "Query Types",
+      "",
+      "Indexing Methods",
+      "",
+      "",
+      "",
+      "",
+      "NSD",
+      "Scalability",
+      "",
+      "Replication",
+      "Sharding",
+      "Partitioning",
+      "Maximum Dimension"
+     ],
+     [
+      "",
+      "ANNS",
+      "NNS",
+      "Brute Force",
+      "Tree Based",
+      "Hash Based",
+      "Graph Based",
+      "Quantization Based",
+      "",
+      "Horizontal Scaling",
+      "Vertical Scaling",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "PgVector",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "7",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "16,000"
+     ],
+     [
+      "QdrantCloud",
+      "✓",
+      "✓",
+      "✓",
+      "×",
+      "×",
+      "✓",
+      "✓",
+      "4",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "65,535"
+     ],
+     [
+      "WeaviateCloud",
+      "✓",
+      "✓",
+      "✓",
+      "×",
+      "×",
+      "✓",
+      "×",
+      "6",
+      "✓",
+      "×",
+      "✓",
+      "✓",
+      "✓",
+      "65,535"
+     ],
+     [
+      "ZillizCloud",
+      "✓",
+      "✓",
+      "✓",
+      "×",
+      "✓",
+      "✓",
+      "✓",
+      "4",
+      "×",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "32,768"
+     ],
+     [
+      "Milvus",
+      "✓",
+      "✓",
+      "✓",
+      "×",
+      "×",
+      "✓",
+      "✓",
+      "6",
+      "✓",
+      "×",
+      "✓",
+      "✓",
+      "✓",
+      "32,768"
+     ],
+     [
+      "ElasticCloud",
+      "✓",
+      "✓",
+      "✓",
+      "×",
+      "×",
+      "✓",
+      "×",
+      "4",
+      "✓",
+      "×",
+      "✓",
+      "✓",
+      "✓",
+      "N/A"
+     ],
+     [
+      "Pinecone",
+      "✓",
+      "✓",
+      "N/A",
+      "N/A",
+      "N/A",
+      "N/A",
+      "N/A",
+      "3",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "N/A"
+     ]
+    ],
+    "uncertain": [
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ]
+    ],
+    "warnings": [],
+    "n_rows": 9,
+    "n_cols": 15,
+    "degenerate": false,
+    "pdf_cell_match": 1.0,
+    "usable": true
+   },
+   {
+    "id": "T2",
+    "kind": "float",
+    "caption": "Overview of Supported Distance Functions in VDBs",
+    "rows": [
+     [
+      "",
+      "",
+      "PgVector",
+      "QdrantCloud",
+      "WeaviateCloud",
+      "ZillizCloud",
+      "Milvus",
+      "ElasticCloud",
+      "Pinecone"
+     ],
+     [
+      "Distance Function",
+      "Inner Product",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "✓"
+     ],
+     [
+      "",
+      "Cosine Similarity",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "✓"
+     ],
+     [
+      "",
+      "Manhattan Distance",
+      "✓",
+      "✓",
+      "✓",
+      "×",
+      "×",
+      "×",
+      "×"
+     ],
+     [
+      "",
+      "Hamming Distance",
+      "✓",
+      "×",
+      "✓",
+      "✓",
+      "✓",
+      "×",
+      "×"
+     ],
+     [
+      "",
+      "Jaccard Distance",
+      "✓",
+      "×",
+      "×",
+      "✓",
+      "✓",
+      "×",
+      "×"
+     ],
+     [
+      "",
+      "Taxicab Distance",
+      "✓",
+      "×",
+      "×",
+      "×",
+      "×",
+      "×",
+      "×"
+     ],
+     [
+      "",
+      "Euclidean Distance",
+      "✓",
+      "✓",
+      "✓",
+      "×",
+      "✓",
+      "✓",
+      "✓"
+     ],
+     [
+      "",
+      "Structural Similarity",
+      "×",
+      "×",
+      "×",
+      "×",
+      "✓",
+      "×",
+      "×"
+     ],
+     [
+      "",
+      "Max Inner Product",
+      "×",
+      "×",
+      "×",
+      "×",
+      "×",
+      "✓",
+      "×"
+     ]
+    ],
+    "uncertain": [
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ]
+    ],
+    "warnings": [],
+    "n_rows": 10,
+    "n_cols": 9,
+    "degenerate": false,
+    "pdf_cell_match": 1.0,
+    "usable": true
+   },
+   {
+    "id": "T3",
+    "kind": "float",
+    "caption": "Overview of Supported Indexing Methods in VDBs",
+    "rows": [
+     [
+      "",
+      "",
+      "PgVector",
+      "QdrantCloud",
+      "WeaviateCloud",
+      "ZillizCloud",
+      "Milvus",
+      "ElasticCloud",
+      "Pinecone"
+     ],
+     [
+      "Indexing Method",
+      "HNSW",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "N/A"
+     ],
+     [
+      "",
+      "Flat",
+      "×",
+      "×",
+      "✓",
+      "×",
+      "✓",
+      "×",
+      "N/A"
+     ],
+     [
+      "",
+      "BINFlat",
+      "×",
+      "×",
+      "×",
+      "×",
+      "✓",
+      "×",
+      "N/A"
+     ],
+     [
+      "",
+      "IVF_Flat",
+      "×",
+      "×",
+      "×",
+      "×",
+      "✓",
+      "×",
+      "N/A"
+     ],
+     [
+      "",
+      "BIN_IVF_Flat",
+      "×",
+      "×",
+      "×",
+      "×",
+      "✓",
+      "×",
+      "N/A"
+     ],
+     [
+      "",
+      "IVF_SQ8",
+      "×",
+      "×",
+      "×",
+      "×",
+      "✓",
+      "×",
+      "N/A"
+     ],
+     [
+      "",
+      "IVF_PQ",
+      "×",
+      "×",
+      "×",
+      "×",
+      "✓",
+      "×",
+      "N/A"
+     ],
+     [
+      "",
+      "B-tree",
+      "✓",
+      "×",
+      "×",
+      "×",
+      "×",
+      "×",
+      "N/A"
+     ],
+     [
+      "",
+      "LSH",
+      "×",
+      "×",
+      "×",
+      "✓",
+      "×",
+      "×",
+      "N/A"
+     ],
+     [
+      "",
+      "BRIN",
+      "✓",
+      "×",
+      "×",
+      "×",
+      "×",
+      "×",
+      "N/A"
+     ],
+     [
+      "",
+      "Inverted_File_Index",
+      "✓",
+      "×",
+      "×",
+      "×",
+      "✓",
+      "✓",
+      "N/A"
+     ],
+     [
+      "",
+      "SPARSE Inverted Index",
+      "×",
+      "×",
+      "×",
+      "×",
+      "×",
+      "×",
+      "N/A"
+     ],
+     [
+      "",
+      "SPARSE WAND",
+      "×",
+      "×",
+      "×",
+      "×",
+      "✓",
+      "×",
+      "N/A"
+     ],
+     [
+      "",
+      "GIST",
+      "✓",
+      "×",
+      "×",
+      "×",
+      "×",
+      "×",
+      "N/A"
+     ],
+     [
+      "",
+      "GIN",
+      "✓",
+      "×",
+      "×",
+      "×",
+      "×",
+      "×",
+      "N/A"
+     ],
+     [
+      "",
+      "DiskANN",
+      "×",
+      "✓",
+      "×",
+      "✓",
+      "×",
+      "×",
+      "N/A"
+     ],
+     [
+      "",
+      "SCANN",
+      "×",
+      "×",
+      "×",
+      "✓",
+      "×",
+      "×",
+      "N/A"
+     ],
+     [
+      "",
+      "Sparse Vector Index",
+      "×",
+      "✓",
+      "×",
+      "×",
+      "×",
+      "×",
+      "N/A"
+     ],
+     [
+      "",
+      "Parameterized index",
+      "×",
+      "✓",
+      "×",
+      "×",
+      "×",
+      "×",
+      "N/A"
+     ]
+    ],
+    "uncertain": [
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ]
+    ],
+    "warnings": [],
+    "n_rows": 20,
+    "n_cols": 9,
+    "degenerate": false,
+    "pdf_cell_match": 1.0,
+    "usable": true
+   },
+   {
+    "id": "T4",
+    "kind": "float",
+    "caption": "VECTOR DATABASE EVALUATION TEST CASES",
+    "rows": [
+     [
+      "Case No.",
+      "Case Type",
+      "Dataset",
+      "Dataset Size",
+      "Vector Dimensions",
+      "Filtering Rate",
+      "Test Metrics"
+     ],
+     [
+      "1",
+      "Capacity",
+      "SIFT 1",
+      "500K",
+      "128",
+      "N/A",
+      "NIV"
+     ],
+     [
+      "2",
+      "Capacity",
+      "GIST 2",
+      "100K",
+      "960",
+      "N/A",
+      "NIV"
+     ],
+     [
+      "3",
+      "Search Performance",
+      "Google C4 3",
+      "500K",
+      "1536",
+      "N/A",
+      "IBT, R, L, MQPS"
+     ]
+    ],
+    "uncertain": [
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false
+     ]
+    ],
+    "warnings": [
+     "\\tnote"
+    ],
+    "n_rows": 4,
+    "n_cols": 7,
+    "degenerate": false,
+    "pdf_cell_match": 1.0,
+    "usable": true
+   }
+  ],
+  "2310.14021": [
+   {
+    "id": "T1",
+    "kind": "float",
+    "caption": "Common similarity scores.",
+    "rows": [
+     [
+      "Type",
+      "Score",
+      "Metric",
+      "Complexity",
+      "Range"
+     ],
+     [
+      "Sim.",
+      "Inner Prod.",
+      "×",
+      "O(D)",
+      "R"
+     ],
+     [
+      "",
+      "Cosine",
+      "×",
+      "O(D)",
+      "[-1,1 ]"
+     ],
+     [
+      "Dist.",
+      "Minkowski",
+      "✓",
+      "O(D)",
+      "R^+"
+     ],
+     [
+      "",
+      "Mahalanobis",
+      "✓",
+      "O(D^2+O(1))",
+      "R^+"
+     ],
+     [
+      "",
+      "Hamming",
+      "✓",
+      "O(D)",
+      "N"
+     ]
+    ],
+    "uncertain": [
+     [
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false
+     ]
+    ],
+    "warnings": [],
+    "n_rows": 6,
+    "n_cols": 5,
+    "degenerate": false,
+    "pdf_cell_match": 1.0,
+    "usable": true
+   },
+   {
+    "id": "T2",
+    "kind": "float",
+    "caption": "Query variants.",
+    "rows": [
+     [
+      "Variant",
+      "Sub-Variant"
+     ],
+     [
+      "Predicated",
+      ""
+     ],
+     [
+      "Batched",
+      ""
+     ],
+     [
+      "Multi-Vector",
+      "Multi-Query, Single Feature (MQSF)"
+     ],
+     [
+      "",
+      "Multi-Query, Multi-Feature (MQMF)"
+     ],
+     [
+      "",
+      "Single-Query, Multi-Feature (SQMF)"
+     ]
+    ],
+    "uncertain": [
+     [
+      false,
+      false
+     ],
+     [
+      false,
+      false
+     ],
+     [
+      false,
+      false
+     ],
+     [
+      false,
+      false
+     ],
+     [
+      false,
+      false
+     ],
+     [
+      false,
+      false
+     ]
+    ],
+    "warnings": [],
+    "n_rows": 6,
+    "n_cols": 2,
+    "degenerate": false,
+    "pdf_cell_match": 1.0,
+    "usable": true
+   },
+   {
+    "id": "T3",
+    "kind": "float",
+    "caption": "Representative table-based indexes.",
+    "rows": [
+     [
+      "Type",
+      "Index",
+      "Hash Function"
+     ],
+     [
+      "LSH",
+      "E^2LSH",
+      "Rand. hyperplanes"
+     ],
+     [
+      "",
+      "IndexLSH",
+      "Rand. bits"
+     ],
+     [
+      "",
+      "FALCONN",
+      "Rand. balls"
+     ],
+     [
+      "L2H",
+      "SPANN",
+      "Nearest centroid"
+     ],
+     [
+      "Quant.",
+      "SQ",
+      "Nearest discrete value"
+     ],
+     [
+      "",
+      "PQ",
+      "Nearest centroid product"
+     ],
+     [
+      "",
+      "IVFSQ",
+      "Nearest centroid"
+     ],
+     [
+      "",
+      "IVFADC",
+      "Nearest centroid"
+     ]
+    ],
+    "uncertain": [
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ]
+    ],
+    "warnings": [],
+    "n_rows": 9,
+    "n_cols": 3,
+    "degenerate": false,
+    "pdf_cell_match": 1.0,
+    "usable": true
+   },
+   {
+    "id": "T4",
+    "kind": "float",
+    "caption": "Representative tree-based indexes.",
+    "rows": [
+     [
+      "Index",
+      "Splitting Plane",
+      "Splitting Point"
+     ],
+     [
+      "k -d tree",
+      "Axis parallel",
+      "Median"
+     ],
+     [
+      "PKD-tree",
+      "Principal dim.",
+      "Median"
+     ],
+     [
+      "FLANN",
+      "Random principal dim.",
+      "Median"
+     ],
+     [
+      "RPTree",
+      "Random plane",
+      "Median + offset"
+     ],
+     [
+      "ANNOY",
+      "Random plane",
+      "Random median"
+     ]
+    ],
+    "uncertain": [
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      true,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false
+     ]
+    ],
+    "warnings": [
+     "\\nobreakdash"
+    ],
+    "n_rows": 6,
+    "n_cols": 3,
+    "degenerate": false,
+    "pdf_cell_match": 1.0,
+    "usable": true
+   },
+   {
+    "id": "T5",
+    "kind": "float",
+    "caption": "Representative graph-based indexes.",
+    "rows": [
+     [
+      "Type",
+      "Index",
+      "Initialization",
+      "Construction"
+     ],
+     [
+      "KNNG",
+      "KGraph",
+      "Random KNNG",
+      "Iterative refine"
+     ],
+     [
+      "",
+      "EFANNA",
+      "Random trees",
+      "Iterative refine"
+     ],
+     [
+      "MSN",
+      "FANNG",
+      "Empty graph",
+      "Random trial"
+     ],
+     [
+      "",
+      "NSG",
+      "Approx. KNNG",
+      "Fixed trial"
+     ],
+     [
+      "",
+      "Vamana",
+      "Random graph",
+      "Fixed trial"
+     ],
+     [
+      "SW",
+      "NSW",
+      "Empty graph",
+      "One-shot refine"
+     ],
+     [
+      "",
+      "HNSW",
+      "Empty graph",
+      "One-shot refine"
+     ]
+    ],
+    "uncertain": [
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ]
+    ],
+    "warnings": [],
+    "n_rows": 8,
+    "n_cols": 4,
+    "degenerate": false,
+    "pdf_cell_match": 1.0,
+    "usable": true
+   },
+   {
+    "id": "T6",
+    "kind": "float",
+    "caption": "Representative search indexes.",
+    "rows": [
+     [
+      "*Structure",
+      "*Index",
+      "*Partitioning",
+      "*Residence",
+      "Complexity",
+      "",
+      "",
+      "*Update",
+      "*Error Bound"
+     ],
+     [
+      "",
+      "",
+      "",
+      "",
+      "Constr.",
+      "Space",
+      "Query",
+      "",
+      ""
+     ],
+     [
+      "Table",
+      "E^2LSH",
+      "Space",
+      "Mem.",
+      "Med.",
+      "High",
+      "Med.",
+      "Y",
+      "✓"
+     ],
+     [
+      "",
+      "FALCONN",
+      "Space",
+      "Mem.",
+      "Med.",
+      "High",
+      "Med.",
+      "R",
+      "✓"
+     ],
+     [
+      "",
+      "*SQ",
+      "Discrete",
+      "Mem.",
+      "Med.",
+      "Low",
+      "Med.",
+      "Y",
+      "×"
+     ],
+     [
+      "",
+      "*PQ",
+      "Clustering",
+      "Mem.",
+      "Med.",
+      "Low",
+      "Med.",
+      "R",
+      "×"
+     ],
+     [
+      "",
+      "*IVFSQ",
+      "Clustering",
+      "Mem.",
+      "Med.",
+      "Low",
+      "Med.",
+      "R",
+      "×"
+     ],
+     [
+      "",
+      "*IVFADC",
+      "Clustering",
+      "Mem.",
+      "Med.",
+      "Low",
+      "Med.",
+      "R",
+      "×"
+     ],
+     [
+      "",
+      "SPANN",
+      "Clustering",
+      "Disk",
+      "Med.",
+      "Med.",
+      "Med.",
+      "R",
+      "×"
+     ],
+     [
+      "Tree",
+      "FLANN",
+      "Space",
+      "Mem.",
+      "High",
+      "High",
+      "Low",
+      "R",
+      "×"
+     ],
+     [
+      "",
+      "RPTree",
+      "Space",
+      "Mem.",
+      "Low",
+      "High",
+      "Low",
+      "R",
+      "✓"
+     ],
+     [
+      "",
+      "*ANNOY",
+      "Space",
+      "Mem.",
+      "Low",
+      "High",
+      "Low",
+      "R",
+      "×"
+     ],
+     [
+      "Graph",
+      "NN-Descent (KGraph)",
+      "Proximity",
+      "Mem.",
+      "Med.",
+      "Med.",
+      "Med.",
+      "N",
+      "×"
+     ],
+     [
+      "",
+      "EFANNA",
+      "Proximity",
+      "Mem.",
+      "High",
+      "Med.",
+      "Low",
+      "N",
+      "×"
+     ],
+     [
+      "",
+      "FANNG",
+      "Proximity",
+      "Mem.",
+      "High",
+      "Med.",
+      "Med.",
+      "N",
+      "×"
+     ],
+     [
+      "",
+      "NSG",
+      "Proximity",
+      "Mem.",
+      "High",
+      "Med.",
+      "Low",
+      "N",
+      "×"
+     ],
+     [
+      "",
+      "Vamana (DiskANN)",
+      "Proximity",
+      "Disk",
+      "Med.",
+      "Med.",
+      "Low",
+      "N",
+      "×"
+     ],
+     [
+      "",
+      "*HNSW",
+      "Proximity",
+      "Mem.",
+      "Low",
+      "Med.",
+      "Low",
+      "Y",
+      "×"
+     ]
+    ],
+    "uncertain": [
+     [
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ]
+    ],
+    "warnings": [
+     "\\tnotea",
+     "\\tnoteb",
+     "\\tnotec"
+    ],
+    "n_rows": 18,
+    "n_cols": 9,
+    "degenerate": false,
+    "pdf_cell_match": 1.0,
+    "usable": true
+   },
+   {
+    "id": "T7",
+    "kind": "float",
+    "caption": "A list of current VDBMSs. Dates are estimated from paper publication, earliest Github release, blog post, or other indications. Dates indicate year when vector search capability first appeared in the product.",
+    "rows": [
+     [
+      "*Name",
+      "*Type",
+      "*Sub- Type",
+      "Vector Query",
+      "",
+      "",
+      "Query Variant",
+      "",
+      "",
+      "Vector Index",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "",
+      "Ex.",
+      "Ap.",
+      "Rng.",
+      "Pr.",
+      "Mul.",
+      "Bat.",
+      "Tab.",
+      "Tr.",
+      "Gr.",
+      "Opt."
+     ],
+     [
+      "EuclidesDB (2018)",
+      "Nat.",
+      "Vec.",
+      "✓",
+      "✓",
+      "×",
+      "×",
+      "×",
+      "×",
+      "✓",
+      "✓",
+      "✓",
+      "×"
+     ],
+     [
+      "Vearch (2018)",
+      "Nat.",
+      "Vec.",
+      "×",
+      "✓",
+      "×",
+      "✓",
+      "×",
+      "×",
+      "✓",
+      "×",
+      "×",
+      "×"
+     ],
+     [
+      "Pinecone (2019)",
+      "Nat.",
+      "Vec.",
+      "×",
+      "✓",
+      "×",
+      "✓",
+      "✓",
+      "×",
+      "Proprietary",
+      "",
+      "",
+      "U"
+     ],
+     [
+      "Vald (2020)",
+      "Nat.",
+      "Vec.",
+      "✓",
+      "✓",
+      "✓",
+      "×",
+      "×",
+      "✓",
+      "×",
+      "×",
+      "✓",
+      "×"
+     ],
+     [
+      "Chroma (2022)",
+      "Nat.",
+      "Vec.",
+      "×",
+      "✓",
+      "×",
+      "✓",
+      "×",
+      "×",
+      "×",
+      "×",
+      "✓",
+      "U"
+     ],
+     [
+      "Weaviate (2019)",
+      "Nat.",
+      "Mix",
+      "×",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "×",
+      "×",
+      "×",
+      "✓",
+      "×"
+     ],
+     [
+      "Milvus (2021)",
+      "Nat.",
+      "Mix",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "×",
+      "✓",
+      "✓"
+     ],
+     [
+      "NucliaDB (2021)",
+      "Nat.",
+      "Mix",
+      "×",
+      "✓",
+      "✓",
+      "✓",
+      "U",
+      "×",
+      "×",
+      "×",
+      "✓",
+      "×"
+     ],
+     [
+      "Qdrant (2021)",
+      "Nat.",
+      "Mix",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "×",
+      "×",
+      "✓",
+      "✓"
+     ],
+     [
+      "Manu (2022)",
+      "Nat.",
+      "Mix",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "×",
+      "✓",
+      "✓"
+     ],
+     [
+      "Marqo (2022)",
+      "Nat.",
+      "Mix",
+      "×",
+      "✓",
+      "×",
+      "✓",
+      "✓",
+      "✓",
+      "×",
+      "×",
+      "✓",
+      "U"
+     ],
+     [
+      "Vespa (2020)",
+      "Ext.",
+      "NoSQL",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "×",
+      "×",
+      "×",
+      "✓",
+      "✓"
+     ],
+     [
+      "Cosmos DB (2023)",
+      "Ext.",
+      "NoSQL",
+      "×",
+      "✓",
+      "×",
+      "×",
+      "×",
+      "×",
+      "✓",
+      "×",
+      "×",
+      "×"
+     ],
+     [
+      "MongoDB (2023)",
+      "Ext.",
+      "NoSQL",
+      "×",
+      "✓",
+      "×",
+      "✓",
+      "×",
+      "×",
+      "×",
+      "×",
+      "✓",
+      "×"
+     ],
+     [
+      "Neo4j (2023)",
+      "Ext.",
+      "NoSQL",
+      "×",
+      "✓",
+      "×",
+      "×",
+      "×",
+      "×",
+      "×",
+      "×",
+      "✓",
+      "×"
+     ],
+     [
+      "Redis (2023)",
+      "Ext.",
+      "NoSQL",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "×",
+      "✓",
+      "×",
+      "×",
+      "✓",
+      "×"
+     ],
+     [
+      "AnalyticDB-V (2020)",
+      "Ext.",
+      "Rel.",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "×",
+      "×",
+      "✓",
+      "×",
+      "✓",
+      "✓"
+     ],
+     [
+      "PASE+PG (2020)",
+      "Ext.",
+      "Rel.",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "×",
+      "×",
+      "✓",
+      "×",
+      "✓",
+      "✓"
+     ],
+     [
+      "pgvector+PG (2021)",
+      "Ext.",
+      "Rel.",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "×",
+      "✓",
+      "×",
+      "✓",
+      "✓"
+     ],
+     [
+      "SingleStoreDB (2022)",
+      "Ext.",
+      "Rel.",
+      "✓",
+      "×",
+      "✓",
+      "✓",
+      "×",
+      "×",
+      "×",
+      "×",
+      "×",
+      "✓"
+     ],
+     [
+      "ClickHouse (2023)",
+      "Ext.",
+      "Rel.",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "×",
+      "×",
+      "×",
+      "✓",
+      "✓",
+      "✓"
+     ],
+     [
+      "MyScale (2023)",
+      "Ext.",
+      "Rel.",
+      "✓",
+      "✓",
+      "✓",
+      "✓",
+      "×",
+      "×",
+      "✓",
+      "×",
+      "P",
+      "✓"
+     ]
+    ],
+    "uncertain": [
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ]
+    ],
+    "warnings": [],
+    "n_rows": 24,
+    "n_cols": 13,
+    "degenerate": false,
+    "pdf_cell_match": 1.0,
+    "usable": true
+   }
+  ],
+  "2402.10460": [
+   {
+    "id": "T1",
+    "kind": "float",
+    "caption": "Comparison of LSM-Tree based Data Systems and KV-stores",
+    "rows": [
+     [
+      "Paper",
+      "Year",
+      "Description",
+      "Remarks"
+     ],
+     [
+      "sLSM",
+      "2018",
+      "-Used skiplist data structure to implement memtable -Implemented Min-Heap based merge operation",
+      "-Merge complexity O(n log(mD)) -Can not be used for secondary index"
+     ],
+     [
+      "NoveLSM",
+      "2018",
+      "-First LSM-based index to Utilize PM -Uses DRAM-SSD for storing memtable and SStable respectively",
+      "Reduced serialization/deserialization cost -Faster compaction -Reduced write stalls caused by LSM-Tree Not cost effective for large data system as all the data is stored inside PM"
+     ],
+     [
+      "TLSM",
+      "2020",
+      "-Enhanced NoveLSM Design -Utilized DRAM-PM-SSD memory hierarchy for storing data",
+      "-Improved compaction and merge algorithms as compared to NoveLSM"
+     ],
+     [
+      "NV-cache",
+      "2022",
+      "-Added PM based cache between DRAM and SSD - Used Skiplist to implement cache for better compaction",
+      "- Achieved better performance than existing works like, NoveLSM"
+     ],
+     [
+      "dLSM",
+      "2023",
+      "- Introduced the usage of disaggregated memory in LSM-Tree design - Used RDMA to connect CPU with byte-addressable PM - Proposed PM based memory allocator and semi-persistent memtable",
+      "- Achieved performance gain for YCSB and TPC-C benchmarks -Reduced synchronization overhead in disaggregated environments"
+     ],
+     [
+      "Perseid",
+      "2023",
+      "-Utilized DRAM-PM memory hierarchy Hash-based validation strategy to remove obsolete entries",
+      "-Enhanced query performance -Achieved better performance than existing state-of-the-art"
+     ]
+    ],
+    "uncertain": [
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ]
+    ],
+    "warnings": [],
+    "n_rows": 7,
+    "n_cols": 4,
+    "degenerate": false,
+    "pdf_cell_match": 1.0,
+    "usable": true
+   },
+   {
+    "id": "T2",
+    "kind": "float",
+    "caption": "Comparison of LSM-Tree based Data Systems and KV-stores",
+    "rows": [
+     [
+      "Paper",
+      "Year",
+      "Description",
+      "Remarks"
+     ],
+     [
+      "AsterixDB",
+      "2014",
+      "-First system to handle big data utilizing LSM-Tree -Implements a number of LSM-Tree based primary and secondary indexes Proposed LSM-ification framework to convert any index to LSM-Tree index",
+      "-Open source big data system"
+     ],
+     [
+      "RocksDB",
+      "2017",
+      "-Developed by Facebook as an extension of LevelDB -Implemented levelling merge policy Dynamic resizing of levels",
+      "-Open source big data system -Highly optimized for space utilization -Implement novel techniques for CPU resouce utilization"
+     ],
+     [
+      "LSM-Trie",
+      "2015",
+      "-LSM-Tree based KV-store -Key characteristic huge storage capacity",
+      "-High throughput of write and read operations"
+     ],
+     [
+      "LDS",
+      "2017",
+      "-LSM-Tree based direct storage system - Proposed novel file system abstraction stating the fact that file system level indexes are not optimized for LSM-Tree",
+      "-With LDS LSM-Tree are able to achieve upto 2.5 times improved performance"
+     ],
+     [
+      "WiscKey",
+      "2017",
+      "- LSM-Tree based KV-store - In this, key is stored in LSM-Tree , and KV-pair is written to log file stored in SSD -Size of memtable is smaller",
+      "-The key achievement is reduced tail latency"
+     ],
+     [
+      "SpanDB",
+      "2021",
+      "-KV-store motivated by RocksDB -Utilized normal SSDs as well as NVMe SSDs for better IO and cost effectiveness -Utilized SPDK library for writing into NVMe SSD",
+      "-Achieved improved disk utilization, which is the bottleneck in LSM-Tree"
+     ],
+     [
+      "NVKVS",
+      "2022",
+      "-Addressed multi-threading issues in LSM-Tree based KV-stores Utilised PM to addressed issues of KV separated stores",
+      "-Able to achieve reduced write latency -Achieve increased system durability"
+     ],
+     [
+      "GDH",
+      "2023",
+      "-Proposed GDH based data migration Utilized hash table to implement memtable",
+      "-The time complexity of operations is reduced from O(log N) to O(1)"
+     ]
+    ],
+    "uncertain": [
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ],
+     [
+      false,
+      false,
+      false,
+      false
+     ]
+    ],
+    "warnings": [],
+    "n_rows": 9,
+    "n_cols": 4,
+    "degenerate": false,
+    "pdf_cell_match": 1.0,
+    "usable": true
+   }
+  ]
+ }
+}

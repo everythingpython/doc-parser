@@ -218,3 +218,12 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+.DS_Store
+forms/FUNSD/__MACOSX/*
+
+forms/FUNSD/dataset/*
+eval/outputs/*
+papers_db
+frameworks
+papers
+filings

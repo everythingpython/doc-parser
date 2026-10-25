@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parser comparison</title>
+<style>
+:root{
+  --bg:#E8ECF0; --surface:#FAFBFC; --ink:#18222D; --muted:#566371; --rule:#C8D0D8; --accent:#2B5FA5;
+  --e0:#2B5FA5; --e1:#8A3D8E; --e2:#178A6B;
+  --ok:#CDE8DA; --ok-g:#1B6E4A; --moved:#F4E1AE; --moved-g:#8A6411; --near:#F6ECBD; --near-g:#7A6A12;
+  --missing:#F2C6C9; --missing-g:#9C2B33; --extra:#CFDFF2; --extra-g:#2B5FA5; --unc-a:#DCE0E5; --unc-b:#EBEEF1;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Charter,Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#12181F; --surface:#1A222B; --ink:#E4EAF0; --muted:#98A5B3; --rule:#2F3A46; --accent:#6FA0E8;
+    --e0:#6FA0E8; --e1:#C98BD0; --e2:#4FC3A1;
+    --ok:#1F4A38; --ok-g:#7FD6AB; --moved:#4F4119; --moved-g:#E5C46A; --near:#4A4519; --near-g:#D9CC6A;
+    --missing:#5A2429; --missing-g:#F09BA1; --extra:#22405F; --extra-g:#8DB8F0; --unc-a:#2A333D; --unc-b:#222A33;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#12181F; --surface:#1A222B; --ink:#E4EAF0; --muted:#98A5B3; --rule:#2F3A46; --accent:#6FA0E8;
+  --e0:#6FA0E8; --e1:#C98BD0; --e2:#4FC3A1;
+  --ok:#1F4A38; --ok-g:#7FD6AB; --moved:#4F4119; --moved-g:#E5C46A; --near:#4A4519; --near-g:#D9CC6A;
+  --missing:#5A2429; --missing-g:#F09BA1; --extra:#22405F; --extra-g:#8DB8F0; --unc-a:#2A333D; --unc-b:#222A33;
+}
+*{box-sizing:border-box}
+html{color-scheme:light dark}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 var(--sans)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button{font:inherit;color:inherit}
+.top{background:var(--surface);border-bottom:1px solid var(--rule)}
+.top-in{max-width:1360px;margin:0 auto;padding:18px 24px 0;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 28px}
+.top h1{font:600 1.55rem/1.2 var(--serif);margin:0}
+a{color:var(--e0);text-underline-offset:2px}
+.meta{color:var(--muted);font-size:.85rem;margin:0}
+.tabs{display:flex;gap:2px;width:100%;margin-top:10px;align-items:flex-end}
+.tab{background:none;border:0;border-bottom:3px solid transparent;padding:8px 14px;color:var(--muted);cursor:pointer}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent);font-weight:600}
+.theme-btn{margin-left:auto;margin-bottom:6px;background:none;border:1px solid var(--rule);border-radius:4px;padding:3px 10px;color:var(--muted);cursor:pointer}
+main{max-width:1360px;margin:0 auto;padding:24px}
+h2{font:600 1.3rem/1.3 var(--serif);margin:28px 0 6px}
+h2:first-child{margin-top:0}
+h3{font:600 1.05rem/1.3 var(--serif);margin:22px 0 4px}
+.lede{max-width:68ch;margin:0 0 14px;color:var(--ink)}
+.muted{color:var(--muted)}
+.small{font-size:.85rem}
+
+.board{border-collapse:collapse;width:100%;max-width:920px;background:var(--surface);border:1px solid var(--rule)}
+.board th,.board td{padding:10px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--rule)}
+.board thead th{border-bottom:3px solid var(--c,var(--rule));font-weight:600}
+.board thead th:first-child{border-bottom-color:var(--rule)}
+.board .what{font-weight:600}
+.board .why{display:block;font-weight:400;color:var(--muted);font-size:.82rem}
+.board td.val{font-variant-numeric:tabular-nums;white-space:nowrap}
+.board td.val.best{font-weight:700}
+.board td.val .bar{display:block;height:4px;margin-top:6px;background:var(--rule);border-radius:2px;overflow:hidden;width:120px}
+.board td.val .bar i{display:block;height:100%;background:var(--c)}
+
+.seg{display:inline-flex;border:1px solid var(--rule);border-radius:5px;overflow:hidden;background:var(--surface)}
+.seg button{background:none;border:0;padding:5px 12px;cursor:pointer;color:var(--muted)}
+.seg button+button{border-left:1px solid var(--rule)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--surface)}
+.row-ctl{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:8px 0 10px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.82rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{display:inline-block;width:16px;height:16px;border:1px solid var(--rule);text-align:center;font-size:10px;line-height:15px;font-style:normal}
+.eng-key{display:inline-flex;align-items:center;gap:6px;margin-right:14px}
+.eng-key i{width:11px;height:11px;border-radius:50%;background:var(--c);display:inline-block}
+
+.dots{width:100%;max-width:1000px;height:auto;display:block;background:var(--surface);border:1px solid var(--rule)}
+.dp-label{fill:var(--ink);font-size:12px;font-family:var(--sans)}
+.dp-sub{fill:var(--muted);font-size:11px;font-family:var(--sans)}
+.dp-grid{stroke:var(--rule);stroke-width:1}
+.dp-line{stroke:var(--muted);stroke-width:2;opacity:.55}
+.dp-row{cursor:pointer}
+.dp-row .dp-hit{fill:transparent}
+.dp-row:hover .dp-hit,.dp-row:focus .dp-hit{fill:var(--bg)}
+
+.split{display:grid;grid-template-columns:330px minmax(0,1fr);gap:24px;align-items:start}
+.list-wrap{position:sticky;top:12px}
+.filter{width:100%;padding:7px 10px;border:1px solid var(--rule);border-radius:5px;background:var(--surface);color:var(--ink);font:inherit;margin-bottom:8px}
+.list{max-height:calc(100vh - 90px);overflow:auto;border:1px solid var(--rule);background:var(--surface)}
+.item{display:block;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--rule);padding:9px 12px;cursor:pointer}
+.item:hover{background:var(--bg)}
+.item[aria-current="true"]{background:var(--bg);box-shadow:inset 3px 0 0 var(--accent)}
+.item b{display:block;font-weight:600}
+.item .cap{display:block;color:var(--muted);font-size:.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chips{display:flex;gap:6px;margin-top:4px;flex-wrap:wrap}
+.chip{font-size:.75rem;padding:0 6px;border-left:3px solid var(--c);background:var(--bg);font-variant-numeric:tabular-nums}
+.detail h2{margin-bottom:2px}
+.panels{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px;margin-top:12px}
+.panels.stack{grid-template-columns:minmax(0,1fr)}
+.split.wide{grid-template-columns:minmax(0,1fr)}
+.split.wide .list-wrap{display:none}
+.btn{background:var(--surface);border:1px solid var(--rule);border-radius:5px;padding:5px 12px;cursor:pointer;color:var(--muted)}
+.panel{background:var(--surface);border:1px solid var(--rule);border-top:3px solid var(--c,var(--muted));min-width:0}
+.panel-h{padding:9px 12px;border-bottom:1px solid var(--rule)}
+.panel-h b{font-weight:600}
+.panel-h span{display:block;color:var(--muted);font-size:.82rem;font-variant-numeric:tabular-nums}
+.panel-scroll{overflow:auto;max-height:68vh}
+.panel-empty{padding:18px 12px;color:var(--muted)}
+.grid{border-collapse:collapse;font-size:12.5px;width:max-content;min-width:100%}
+.grid th,.grid td{border:1px solid var(--rule);padding:3px 15px 3px 6px;vertical-align:top;position:relative;max-width:16rem;min-width:4.5rem;overflow-wrap:break-word;word-break:normal;text-align:left;font-weight:400}
+.grid tr:first-child th{font-weight:600}
+.grid td[data-g]::after,.grid th[data-g]::after{content:attr(data-g);position:absolute;top:1px;right:3px;font-size:9px;line-height:1;color:var(--g,var(--muted))}
+.s-ok{background:var(--ok);--g:var(--ok-g)}
+.s-moved{background:var(--moved);--g:var(--moved-g)}
+.s-near{background:var(--near);--g:var(--near-g)}
+.s-missing{background:var(--missing);--g:var(--missing-g)}
+.s-extra{background:var(--extra);--g:var(--extra-g)}
+.s-uncertain{background:repeating-linear-gradient(135deg,var(--unc-a) 0 4px,var(--unc-b) 4px 8px)}
+.notes-under{margin-top:6px;font-size:.85rem;color:var(--muted)}
+
+.ptable{border-collapse:collapse;width:100%;background:var(--surface);border:1px solid var(--rule);font-variant-numeric:tabular-nums}
+.ptable th,.ptable td{padding:8px 12px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+.ptable thead th{font-weight:600;border-bottom:3px solid var(--c,var(--rule))}
+.ptable tbody tr{cursor:pointer}
+.ptable tbody tr:hover{background:var(--bg)}
+.ptable tbody tr[aria-selected="true"]{background:var(--bg);box-shadow:inset 3px 0 0 var(--accent)}
+.ptable .t{display:block;color:var(--muted);font-size:.82rem;max-width:34ch}
+.viewer{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:16px;margin-top:12px}
+.viewer pre{margin:0;padding:10px 12px;overflow:auto;max-height:70vh;font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre;background:var(--surface);border:1px solid var(--rule);border-top:3px solid var(--c)}
+
+.method{max-width:74ch}
+.method dt{font-weight:600;margin-top:10px}
+.method dd{margin:0 0 4px}
+.method ul{padding-left:20px}
+
+@media (max-width:900px){
+  .split{grid-template-columns:1fr}
+  .list-wrap{position:static}
+  .list{max-height:240px}
+  main{padding:16px}
+}
+</style>
+</head>
+<body>
+<header class="top"><div class="top-in">
+  <h1>Parser comparison</h1>
+  <p class="meta" id="meta"></p>
+  <nav class="tabs" id="tabs" aria-label="Views"></nav>
+</div></header>
+<main id="main"></main>
+<script id="data" type="application/json">__DATA__</script>
+<script>
+(() => {
+'use strict';
+const D = JSON.parse(document.getElementById('data').textContent);
+const M = D.meta, ENG = M.engines, T = D.tables, S = D.summary, P = D.papers, TXT = D.texts, TITLES = D.titles || {};
+const NAMES = {docling: 'Docling', llamaparse: 'LlamaParse'};
+const label = e => NAMES[e] || e.replace(/_/g, ' ');
+const col = e => 'var(--e' + (ENG.indexOf(e) % 3) + ')';
+const $ = (s, r) => (r || document).querySelector(s);
+const pct = v => v == null ? 'n/a' : Math.round(v * 100) + '%';
+const num1 = v => v == null ? 'n/a' : v.toFixed(1);
+
+function h(tag, attrs, ...kids) {
+  const el = document.createElement(tag);
+  for (const k in (attrs || {})) {
+    const v = attrs[k];
+    if (v == null || v === false) continue;
+    if (k.startsWith('on')) el.addEventListener(k.slice(2), v);
+    else if (k === 'class') el.className = v;
+    else el.setAttribute(k, v === true ? '' : v);
+  }
+  for (const kid of kids.flat(Infinity)) {
+    if (kid == null || kid === false) continue;
+    el.append(kid instanceof Node ? kid : document.createTextNode(String(kid)));
+  }
+  return el;
+}
+const SVGNS = 'http://www.w3.org/2000/svg';
+function sv(tag, attrs, ...kids) {
+  const el = document.createElementNS(SVGNS, tag);
+  for (const k in (attrs || {})) if (attrs[k] != null) el.setAttribute(k, attrs[k]);
+  for (const kid of kids.flat(Infinity)) if (kid != null) el.append(kid instanceof Node ? kid : document.createTextNode(String(kid)));
+  return el;
+}
+
+const STATE = {
+  ok: ['✓', 'Right text in the right cell'],
+  moved: ['↔', 'The text is in the table, but in a different cell'],
+  near: ['≈', 'Almost the same text'],
+  missing: ['✕', 'This text is not in the parsed table'],
+  extra: ['+', 'Matches nothing in the gold table'],
+  uncertain: ['?', 'Gold cell has math or LaTeX, so it is not scored']
+};
+
+let mode = 'scored', metric = 'content_recall', paperSel = null, filterText = '', layoutMode = 'auto', listHidden = false;
+
+const VIEWS = [['overview', 'Overview'], ['tables', 'Tables'], ['papers', 'Papers'], ['method', 'Method']];
+$('#meta').textContent = M.n_tables + ' tables with ' + M.gold_cells.toLocaleString() + ' gold cells from ' +
+  M.n_papers + ' papers, scored ' + M.generated.replace('T', ' ');
+const tabs = $('#tabs');
+VIEWS.forEach(v => tabs.append(h('button', {class: 'tab', 'data-view': v[0], onclick: () => { location.hash = '#' + v[0]; }}, v[1])));
+tabs.append(h('button', {class: 'theme-btn', type: 'button', onclick: toggleTheme}, 'Switch theme'));
+function toggleTheme() {
+  const root = document.documentElement;
+  const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  root.dataset.theme = dark ? 'light' : 'dark';
+  try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
+}
+try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+
+function route() {
+  const p = location.hash.replace(/^#/, '').split('/').map(decodeURIComponent);
+  return {view: p[0] || 'overview', a: p[1] || '', b: p[2] || ''};
+}
+function go(hash) { location.hash = hash; }
+const tableHash = t => '#tables/' + encodeURIComponent(t.paper) + '/' + encodeURIComponent(t.id);
+
+const ROWS = [
+  {name: 'Tables found', why: 'Parsed tables matched to a gold table', hi: true,
+   val: s => s.tables_found / s.n_tables, fmt: s => s.tables_found + ' of ' + s.n_tables, bar: true},
+  {name: 'Position accuracy', why: 'Right text in the right row and column', hi: true,
+   val: s => s.position_acc, fmt: s => pct(s.position_acc), bar: true},
+  {name: 'Content recall', why: 'Gold text found anywhere in the matched table', hi: true,
+   val: s => s.content_recall, fmt: s => pct(s.content_recall), bar: true},
+  {name: 'Precision', why: 'Share of parsed cells that match the gold table', hi: true,
+   val: s => s.precision, fmt: s => pct(s.precision), bar: true},
+  {name: 'Extra tables', why: 'Parsed tables with no gold counterpart, such as split tables or figures', hi: false,
+   val: s => s.false_tables, fmt: s => String(s.false_tables)},
+  {name: 'Seconds per page', why: 'Wall-clock time divided by pages', hi: false,
+   val: s => s.secs_per_page, fmt: s => num1(s.secs_per_page)},
+  {name: 'Text coverage', why: 'Words from the PDF text layer that appear in the output', hi: true,
+   val: s => s.text_coverage, fmt: s => pct(s.text_coverage), bar: true}
+];
+
+function scoreboard() {
+  const head = h('tr', null, h('th', {scope: 'col'}, 'Measure'),
+    ENG.map(e => h('th', {scope: 'col', style: '--c:' + col(e)}, label(e) + (S[e].tier ? ' (' + S[e].tier + ')' : ''))));
+  const body = ROWS.map(r => {
+    const vals = ENG.map(e => r.val(S[e]));
+    const real = vals.filter(v => v != null);
+    const best = real.length > 1 ? (r.hi ? Math.max.apply(null, real) : Math.min.apply(null, real)) : null;
+    const allSame = real.length > 1 && real.every(v => Math.abs(v - real[0]) < 1e-9);
+    return h('tr', null,
+      h('th', {scope: 'row', class: 'what'}, r.name, h('span', {class: 'why'}, r.why)),
+      ENG.map((e, i) => {
+        const v = vals[i];
+        const isBest = best != null && !allSame && v != null && Math.abs(v - best) < 1e-9;
+        return h('td', {class: 'val' + (isBest ? ' best' : ''), style: '--c:' + col(e)},
+          v == null ? 'n/a' : r.fmt(S[e]),
+          r.bar && v != null ? h('span', {class: 'bar'}, h('i', {style: 'width:' + Math.round(Math.min(1, v) * 100) + '%'})) : null);
+      }));
+  });
+  return h('table', {class: 'board'}, h('thead', null, head), h('tbody', null, body));
+}
+
+function dotPlot() {
+  const rows = T.map(t => {
+    const vals = ENG.map(e => {
+      const r = t.engines[e];
+      if (!r) return {v: null};
+      if (!r.found) return {v: metric === 'precision' ? null : 0, nf: true};
+      return {v: r[metric]};
+    });
+    const real = vals.map(x => x.v).filter(v => v != null);
+    return {t, vals, spread: real.length > 1 ? Math.max.apply(null, real) - Math.min.apply(null, real) : 0,
+            low: real.length ? Math.min.apply(null, real) : 0};
+  });
+  rows.sort((a, b) => (b.spread - a.spread) || (a.low - b.low));
+  const RH = 26, X0 = 380, X1 = 960, W = 1000, top = 30, H = top + rows.length * RH + 10;
+  const x = v => X0 + v * (X1 - X0);
+  const svg = sv('svg', {class: 'dots', viewBox: '0 0 ' + W + ' ' + H, role: 'img',
+    'aria-label': 'Per-table scores for each parser'});
+  [0, .25, .5, .75, 1].forEach(g => {
+    svg.append(sv('line', {class: 'dp-grid', x1: x(g), x2: x(g), y1: top - 6, y2: H - 6}));
+    svg.append(sv('text', {class: 'dp-sub', x: x(g), y: 16, 'text-anchor': 'middle'}, Math.round(g * 100) + '%'));
+  });
+  rows.forEach((r, i) => {
+    const y = top + i * RH + RH / 2;
+    const cap = (r.t.caption || '').length > 38 ? r.t.caption.slice(0, 37) + '…' : (r.t.caption || '');
+    const g = sv('g', {class: 'dp-row', tabindex: 0, role: 'link',
+      'aria-label': r.t.paper + ' ' + r.t.id + ': ' + (r.t.caption || '')});
+    g.append(sv('title', null, r.t.paper + ' ' + r.t.id + (r.t.caption ? ': ' + r.t.caption : '')));
+    g.append(sv('rect', {class: 'dp-hit', x: 0, y: y - RH / 2, width: W, height: RH}));
+    g.append(sv('text', {class: 'dp-label', x: 8, y: y + 4}, r.t.paper + ' ' + r.t.id));
+    g.append(sv('text', {class: 'dp-sub', x: 128, y: y + 4}, cap));
+    const real = r.vals.map(q => q.v).filter(v => v != null);
+    if (real.length > 1) g.append(sv('line', {class: 'dp-line', x1: x(Math.min.apply(null, real)), x2: x(Math.max.apply(null, real)), y1: y, y2: y}));
+    r.vals.forEach((q, k) => {
+      if (q.v == null) return;
+      const c = col(ENG[k]);
+      g.append(sv('circle', {cx: x(q.v), cy: y + (k - (ENG.length - 1) / 2) * 5, r: 5, fill: q.nf ? 'var(--surface)' : c, stroke: c, 'stroke-width': 2},
+        sv('title', null, label(ENG[k]) + ': ' + (q.nf ? 'table not found' : pct(q.v)))));
+    });
+    const open = () => go(tableHash(r.t));
+    g.addEventListener('click', open);
+    g.addEventListener('keydown', ev => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); open(); } });
+    svg.append(g);
+  });
+  return svg;
+}
+
+function renderOverview() {
+  const main = $('#main');
+  const tiers = ENG.filter(e => S[e].tier).map(e => label(e) + ' ran at the ' + S[e].tier + ' tier. ').join('');
+  main.append(
+    h('h2', null, 'Scoreboard'),
+    h('p', {class: 'lede'}, 'Each parser read ' + M.n_papers + ' arXiv papers. Its output was compared with ' + M.n_tables +
+      ' tables taken from the papers’ LaTeX source, ' + M.gold_cells.toLocaleString() + ' cells in all. ' + tiers +
+      'The bold value in a row is the better one.'),
+    scoreboard(),
+    h('h2', null, 'Table by table'),
+    h('p', {class: 'lede'}, 'Each row is one gold table. A filled dot is a parser that found it; a hollow dot at zero is a parser that did not. Tables where the parsers disagree most come first. Select a row to see its cells.'),
+    h('div', {class: 'row-ctl'},
+      h('div', {class: 'seg', role: 'group', 'aria-label': 'Measure'},
+        [['content_recall', 'Content recall'], ['position_acc', 'Position accuracy'], ['precision', 'Precision']].map(m =>
+          h('button', {type: 'button', 'aria-pressed': String(metric === m[0]), onclick: () => { metric = m[0]; render(); }}, m[1]))),
+      h('span', null, ENG.map(e => h('span', {class: 'eng-key', style: '--c:' + col(e)}, h('i'), label(e))))),
+    dotPlot());
+}
+
+function gridTable(rows, states, tip) {
+  const body = rows.map((r, i) => h('tr', null, r.map((c, j) => {
+    const st = states && states[i] ? states[i][j] : null;
+    const attrs = {title: tip ? tip(i, j, c, st) : null};
+    if (st && st !== 'empty') { attrs.class = 's-' + st; if (STATE[st]) attrs['data-g'] = STATE[st][0]; }
+    return h(i === 0 ? 'th' : 'td', attrs, c);
+  })));
+  return h('table', {class: 'grid'}, h('tbody', null, body));
+}
+
+function legend() {
+  const keys = mode === 'scored' ? ['ok', 'moved', 'near', 'missing', 'uncertain'] : ['ok', 'moved', 'near', 'extra', 'uncertain'];
+  return h('div', {class: 'legend'}, keys.map(k => h('span', null,
+    h('i', {class: 'sw s-' + k}, STATE[k][0]), STATE[k][1])));
+}
+
+function panel(t, e) {
+  const r = t.engines[e];
+  const head = sub => h('div', {class: 'panel-h'}, h('b', null, label(e)), h('span', null, sub));
+  if (!r || !r.found) {
+    return h('section', {class: 'panel', style: '--c:' + col(e)},
+      head(r && r.no_output ? 'No output file for this paper' : 'No matching table in the output'),
+      h('div', {class: 'panel-empty'}, 'Nothing in the parsed output matched this table well enough to compare.'));
+  }
+  const shape = (r.rows_out !== r.rows_gold || r.cols_out !== r.cols_gold)
+    ? ', output ' + r.rows_out + '×' + r.cols_out + ', gold ' + r.rows_gold + '×' + r.cols_gold : '';
+  const sub = 'position ' + pct(r.position_acc) + ', recall ' + pct(r.content_recall) + ', precision ' + pct(r.precision) + shape;
+  let grid;
+  if (mode === 'scored') {
+    grid = gridTable(t.rows, r.gold_states, (i, j, c, st) =>
+      (STATE[st] ? STATE[st][1] + '\n' : '') + 'Gold: ' + c +
+      (r.cand_rows && r.cand_rows[i] && r.cand_rows[i][j] != null ? '\nParsed: ' + r.cand_rows[i][j] : ''));
+  } else {
+    grid = gridTable(r.cand_rows, r.cand_states, (i, j, c, st) => STATE[st] ? STATE[st][1] : '');
+  }
+  return h('section', {class: 'panel', style: '--c:' + col(e)}, head(sub), h('div', {class: 'panel-scroll'}, grid));
+}
+
+function detail(t) {
+  const title = TITLES[t.paper];
+  const goldStates = t.uncertain.map(r => r.map(u => u ? 'uncertain' : null));
+  const stacked = layoutMode === 'stack' || (layoutMode === 'auto' && t.rows[0].length > 6);
+  return h('div', {class: 'detail'},
+    h('h2', null, t.caption || ('Table ' + t.id)),
+    h('p', {class: 'muted small'}, (title ? title + ' (' + t.paper + ')' : t.paper) + ', table ' + t.id + ', ' +
+      t.rows.length + ' rows by ' + t.rows[0].length + ' columns. ',
+      h('a', {href: '../papers_db/' + t.paper + '.pdf', target: '_blank', rel: 'noopener'}, 'Open the PDF')),
+    h('div', {class: 'row-ctl'},
+      h('div', {class: 'seg', role: 'group', 'aria-label': 'View'},
+        [['scored', 'Scored against gold'], ['raw', 'Parsed output']].map(m =>
+          h('button', {type: 'button', 'aria-pressed': String(mode === m[0]), onclick: () => { mode = m[0]; render(); }}, m[1]))),
+      h('div', {class: 'seg', role: 'group', 'aria-label': 'Layout'},
+        [['side', 'Side by side'], ['stack', 'Stacked']].map(m =>
+          h('button', {type: 'button', 'aria-pressed': String((stacked ? 'stack' : 'side') === m[0]), onclick: () => { layoutMode = m[0]; render(); }}, m[1]))),
+      h('button', {class: 'btn', type: 'button', onclick: () => { listHidden = !listHidden; render(); }}, listHidden ? 'Show table list' : 'Hide table list')),
+    h('div', {style: 'margin:0 0 10px'}, legend()),
+    h('div', {class: 'panels' + (stacked ? ' stack' : '')},
+      h('section', {class: 'panel'},
+        h('div', {class: 'panel-h'}, h('b', null, 'Gold'), h('span', null, 'From the LaTeX source')),
+        h('div', {class: 'panel-scroll'}, gridTable(t.rows, goldStates, (i, j, c, st) => (STATE[st] ? STATE[st][1] + '\n' : '') + c))),
+      ENG.map(e => panel(t, e))),
+    h('p', {class: 'notes-under'}, mode === 'scored'
+      ? 'Each parser panel shows the gold grid. A cell’s colour says whether that parser got it right. Hover a cell to see what the parser produced there.'
+      : 'Each parser panel shows what the parser produced. Cells are coloured by whether the gold table contains their text.'));
+}
+
+function visibleTables() {
+  const q = filterText.toLowerCase();
+  return T.filter(t => !q || (t.paper + ' ' + t.id + ' ' + (t.caption || '') + ' ' + (TITLES[t.paper] || '')).toLowerCase().includes(q));
+}
+
+function renderTables(r) {
+  const main = $('#main');
+  const sel = T.find(t => t.paper === r.a && t.id === r.b) || T[0];
+  if (!sel) { main.append(h('p', null, 'No tables to show.')); return; }
+  const shown = visibleTables();
+  const list = h('div', {class: 'list', id: 'list'}, shown.map(t => h('button', {
+      class: 'item', type: 'button', 'aria-current': String(t === sel), onclick: () => go(tableHash(t))},
+    h('b', null, t.paper + ' ' + t.id),
+    h('span', {class: 'cap'}, t.caption || 'No caption'),
+    h('span', {class: 'chips'}, ENG.map(e => {
+      const x = t.engines[e];
+      return h('span', {class: 'chip', style: '--c:' + col(e), title: label(e) + ' content recall'}, x && x.found ? pct(x.content_recall) : 'missed');
+    })))));
+  if (!shown.length) list.append(h('p', {class: 'panel-empty'}, 'No tables match that filter.'));
+  const input = h('input', {class: 'filter', type: 'search', placeholder: 'Filter by paper, table or caption', 'aria-label': 'Filter tables', value: filterText});
+  input.addEventListener('input', () => {
+    filterText = input.value;
+    const keep = input.selectionStart;
+    render();
+    const again = $('.filter'); again.focus(); again.setSelectionRange(keep, keep);
+  });
+  main.append(h('div', {class: 'split' + (listHidden ? ' wide' : '')}, h('div', {class: 'list-wrap'}, input, list), detail(sel)));
+  const cur = $('.item[aria-current="true"]');
+  if (cur) cur.scrollIntoView({block: 'nearest'});
+}
+
+function renderPapers() {
+  const main = $('#main');
+  const ids = Object.keys(P).sort();
+  if (!paperSel || !P[paperSel]) paperSel = ids[0];
+  const head1 = h('tr', null, h('th', null, 'Paper'), h('th', null, 'Pages'),
+    ENG.map(e => h('th', {style: '--c:' + col(e)}, label(e) + ': seconds, text coverage, tables found')));
+  const pick = id => { paperSel = id; render(); };
+  const rows = ids.map(id => h('tr', {tabindex: 0, 'aria-selected': String(id === paperSel),
+      onclick: () => pick(id), onkeydown: ev => { if (ev.key === 'Enter') pick(id); }},
+    h('td', null, id, h('span', {class: 't'}, TITLES[id] || '')),
+    h('td', null, String(ENG.map(e => P[id].engines[e].pages).find(x => x) || 'n/a')),
+    ENG.map(e => {
+      const x = P[id].engines[e];
+      if (!x.has_output) return h('td', {class: 'muted'}, 'no output');
+      return h('td', null, num1(x.secs) + 's, ' + pct(x.text_coverage) + ', ' + x.tables_found + ' of ' + x.tables_gold +
+        (x.false_tables ? ', ' + x.false_tables + ' extra' : ''));
+    })));
+  main.append(
+    h('h2', null, 'Papers'),
+    h('p', {class: 'lede'}, 'Timing, how much of the PDF’s text made it into the output, and how many gold tables were found. Select a paper to read each parser’s raw markdown side by side.'),
+    h('table', {class: 'ptable'}, h('thead', null, head1), h('tbody', null, rows)),
+    h('h2', null, 'Raw output for ' + paperSel),
+    h('div', {class: 'viewer'}, ENG.map(e => {
+      const txt = TXT[e] && TXT[e][paperSel];
+      return h('div', null, h('p', {class: 'muted small', style: 'margin:0 0 4px'}, label(e)),
+        h('pre', {style: '--c:' + col(e), tabindex: 0}, txt == null ? 'No output for this paper.' : txt));
+    })));
+}
+
+function renderMethod() {
+  const main = $('#main');
+  main.append(h('div', {class: 'method'},
+    h('h2', null, 'How the scores are made'),
+    h('h3', null, 'Ground truth'),
+    h('p', null, 'Each paper’s LaTeX source is parsed for its table environments. Formatting commands are stripped and the author’s own macros are expanded. The result is checked against the text layer of the PDF as a sanity test. Cells with math or unresolved macros are marked uncertain and left out of every score.'),
+    h('h3', null, 'Matching a parsed table to a gold table'),
+    h('p', null, 'Parser output may contain markdown pipe tables or HTML tables (merged cells are expanded to a grid). For each paper, every gold table is compared with every parsed table by the overlap of their cell texts. Pairs are assigned greedily, best first, and a pair needs an overlap score of at least ' + M.match_min + '. A gold table with no partner counts as not found and scores zero.'),
+    h('h3', null, 'Cell comparison'),
+    h('p', null, 'Text is lowercased and stripped of markdown, HTML and punctuation, and check and cross glyphs are unified. Each gold cell then gets one state, in this order of preference:'),
+    h('ul', null, ['ok', 'moved', 'near', 'missing'].map(k => h('li', null, h('i', {class: 'sw s-' + k, style: 'margin-right:8px'}, STATE[k][0]),
+      STATE[k][1] + (k === 'near' ? ' (similarity of at least ' + M.near_threshold + ')' : '') + '.'))),
+    h('h3', null, 'Measures'),
+    h('dl', null,
+      h('dt', null, 'Position accuracy'), h('dd', null, 'Cells that are ok, as a share of scored gold cells. Strict about structure.'),
+      h('dt', null, 'Content recall'), h('dd', null, 'Cells that are ok or moved. Ignores structure, so it shows what text survived.'),
+      h('dt', null, 'Precision'), h('dd', null, 'Parsed cells that match a gold cell, among matched tables.'),
+      h('dt', null, 'Extra tables'), h('dd', null, 'Parsed tables that matched no gold table.'),
+      h('dt', null, 'Text coverage'), h('dd', null, 'Distinct words of four or more letters in the PDF text layer that also appear in the output.')),
+    h('h3', null, 'Limits'),
+    h('ul', null, M.notes.map(n => h('li', null, n)))));
+}
+
+function render() {
+  const r = route();
+  tabs.querySelectorAll('.tab').forEach(b => b.setAttribute('aria-selected', String(b.dataset.view === r.view)));
+  const main = $('#main');
+  main.replaceChildren();
+  if (r.view === 'tables') renderTables(r);
+  else if (r.view === 'papers') renderPapers();
+  else if (r.view === 'method') renderMethod();
+  else renderOverview();
+}
+window.addEventListener('hashchange', render);
+document.addEventListener('keydown', ev => {
+  if (ev.ctrlKey || ev.metaKey || ev.altKey) return;
+  const r = route();
+  if (r.view !== 'tables' || /^(INPUT|TEXTAREA)$/.test(ev.target.tagName)) return;
+  const dir = (ev.key === 'j' || ev.key === 'ArrowDown') ? 1 : (ev.key === 'k' || ev.key === 'ArrowUp') ? -1 : 0;
+  if (!dir) return;
+  const shown = visibleTables();
+  const i = shown.findIndex(t => t.paper === r.a && t.id === r.b);
+  const next = shown[Math.max(0, Math.min(shown.length - 1, i < 0 ? 0 : i + dir))];
+  if (next) { ev.preventDefault(); go(tableHash(next)); }
+});
+render();
+})();
+</script>
+</body>
+</html>

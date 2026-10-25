@@ -1,0 +1,16 @@
+# GLM-OCR SDK config for run_glm_ocr (parsers.py): fully local.
+# The glmocr package's own default has MaaS (Zhipu cloud upload) ON, so this file turns it off,
+# and the adapter also passes mode="selfhosted". The model runs in Ollama on this machine;
+# the PP-DocLayoutV3 layout model runs in this Python process.
+pipeline:
+  maas:
+    enabled: false
+  ocr_api:
+    api_host: localhost
+    api_port: 11434
+    api_path: /api/generate
+    api_mode: ollama_generate
+    model: glm-ocr:latest
+    request_timeout: 600
+  # Region requests sent at once. Ollama queues them anyway; keep low for a 6 GB GPU.
+  max_workers: 4
